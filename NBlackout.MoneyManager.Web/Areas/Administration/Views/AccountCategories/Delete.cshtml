@@ -1,0 +1,33 @@
+﻿@model ReassignAccountCategoryViewModel
+
+<p>@Html.Raw(Resource.Messages_DeleteAccountCategory)</p>
+@using (Html.BeginForm("ConfirmDelete", "AccountCategories", FormMethod.Post, new { id = "confirmDeleteAccountCategoryForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.SourceCategoryId)
+
+    <div class="form-group @((!ViewData.ModelState.IsValidField("TargetCategoryId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.TargetCategoryId, Resource.Messages_ChooseNewAccountCategory)
+        @Html.DropDownListFor(m => m.TargetCategoryId, new SelectList(Model.Categories.OrderBy(t => t.Type.DisplayName()).ThenBy(t => t.Label), "Id", "Label", "TypeDisplayName", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TargetCategoryId, null, new { @class = "help-block" })
+    </div>
+    <button class="btn btn-default">@Resource.Actions_Delete</button>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#confirmDeleteAccountCategoryForm').submit(function() {
+            NBlackout.MoneyManager.Administration.AccountCategories.ListPartial.Crud.confirmDeletion({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_DeletionDone'
+                    });
+
+                    $(document).trigger('account-categories-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,28 @@
+﻿@model TransactionForecastHitViewModel
+
+<p>@Html.Raw(Resource.Messages_DeleteHit)</p>
+@using (Html.BeginForm("ConfirmDeleteForecastHit", "Planning", FormMethod.Post, new { id = "confirmDeleteForecastHitForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <button class="btn btn-default">@Resource.Actions_Delete</button>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#confirmDeleteForecastHitForm').submit(function() {
+            NBlackout.MoneyManager.Configuration.Planning.ForecastHitsPartial.ForecastHits.confirmDeletion({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_DeletionDone'
+                    });
+
+                    $(document).trigger('forecast-hits-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

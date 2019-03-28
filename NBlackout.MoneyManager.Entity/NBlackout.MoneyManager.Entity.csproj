@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4E0E106-C563-4A7C-BB6C-286A9E62CAEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NBlackout.MoneyManager.Entity</RootNamespace>
+    <AssemblyName>NBlackout.MoneyManager.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.DynamicFilters, Version=3.0.1.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.DynamicFilters.3.0.1\lib\net40\EntityFramework.DynamicFilters.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\201511301543041_InitialMigration.cs" />
+    <Compile Include="Migrations\201511301543041_InitialMigration.Designer.cs">
+      <DependentUpon>201511301543041_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511301555183_Alerts.cs" />
+    <Compile Include="Migrations\201511301555183_Alerts.Designer.cs">
+      <DependentUpon>201511301555183_Alerts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511301904403_MandatoryAlertLink.cs" />
+    <Compile Include="Migrations\201511301904403_MandatoryAlertLink.Designer.cs">
+      <DependentUpon>201511301904403_MandatoryAlertLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602262101120_TransactionSourceAndType.cs" />
+    <Compile Include="Migrations\201602262101120_TransactionSourceAndType.Designer.cs">
+      <DependentUpon>201602262101120_TransactionSourceAndType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608310913058_TransactionOriginAmountAndTolerance.cs" />
+    <Compile Include="Migrations\201608310913058_TransactionOriginAmountAndTolerance.Designer.cs">
+      <DependentUpon>201608310913058_TransactionOriginAmountAndTolerance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609061255203_TransactionCategory.cs" />
+    <Compile Include="Migrations\201609061255203_TransactionCategory.Designer.cs">
+      <DependentUpon>201609061255203_TransactionCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609241141338_RemovedIdentityTables.cs" />
+    <Compile Include="Migrations\201609241141338_RemovedIdentityTables.Designer.cs">
+      <DependentUpon>201609241141338_RemovedIdentityTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612031825345_AccountEnabledColumn.cs" />
+    <Compile Include="Migrations\201612031825345_AccountEnabledColumn.Designer.cs">
+      <DependentUpon>201612031825345_AccountEnabledColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612171251317_TransactionForecast.cs" />
+    <Compile Include="Migrations\201612171251317_TransactionForecast.Designer.cs">
+      <DependentUpon>201612171251317_TransactionForecast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612290940200_TransactionForecastTolerance.cs" />
+    <Compile Include="Migrations\201612290940200_TransactionForecastTolerance.Designer.cs">
+      <DependentUpon>201612290940200_TransactionForecastTolerance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612291332539_AlertsRemoved.cs" />
+    <Compile Include="Migrations\201612291332539_AlertsRemoved.Designer.cs">
+      <DependentUpon>201612291332539_AlertsRemoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703122232476_TransactionForecastHit.cs" />
+    <Compile Include="Migrations\201703122232476_TransactionForecastHit.Designer.cs">
+      <DependentUpon>201703122232476_TransactionForecastHit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703231024396_TransactionForecastSimplified.cs" />
+    <Compile Include="Migrations\201703231024396_TransactionForecastSimplified.Designer.cs">
+      <DependentUpon>201703231024396_TransactionForecastSimplified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707201717242_ImportHistoryAndDatabaseConstraints.cs" />
+    <Compile Include="Migrations\201707201717242_ImportHistoryAndDatabaseConstraints.Designer.cs">
+      <DependentUpon>201707201717242_ImportHistoryAndDatabaseConstraints.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707241035274_ImportHistoryUserName.cs" />
+    <Compile Include="Migrations\201707241035274_ImportHistoryUserName.Designer.cs">
+      <DependentUpon>201707241035274_ImportHistoryUserName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708122309085_MandatoryTransactionCategory.cs" />
+    <Compile Include="Migrations\201708122309085_MandatoryTransactionCategory.Designer.cs">
+      <DependentUpon>201708122309085_MandatoryTransactionCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121714039_AutoRescheduleForecast.cs" />
+    <Compile Include="Migrations\201709121714039_AutoRescheduleForecast.Designer.cs">
+      <DependentUpon>201709121714039_AutoRescheduleForecast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041959401_DateTimeOffestToDateTime.cs" />
+    <Compile Include="Migrations\201710041959401_DateTimeOffestToDateTime.Designer.cs">
+      <DependentUpon>201710041959401_DateTimeOffestToDateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804221648500_AccountTechnicalId.cs" />
+    <Compile Include="Migrations\201804221648500_AccountTechnicalId.Designer.cs">
+      <DependentUpon>201804221648500_AccountTechnicalId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804231438182_TransactionOriginAccount.cs" />
+    <Compile Include="Migrations\201804231438182_TransactionOriginAccount.Designer.cs">
+      <DependentUpon>201804231438182_TransactionOriginAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805031415018_UserCustomerAssociation.cs" />
+    <Compile Include="Migrations\201805031415018_UserCustomerAssociation.Designer.cs">
+      <DependentUpon>201805031415018_UserCustomerAssociation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806230757126_AccountFilter.cs" />
+    <Compile Include="Migrations\201806230757126_AccountFilter.Designer.cs">
+      <DependentUpon>201806230757126_AccountFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902061927577_AccountImportHistory.cs" />
+    <Compile Include="Migrations\201902061927577_AccountImportHistory.Designer.cs">
+      <DependentUpon>201902061927577_AccountImportHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902152137073_OriginAndTypeRenamedToOrganizationAndCategory.cs" />
+    <Compile Include="Migrations\201902152137073_OriginAndTypeRenamedToOrganizationAndCategory.Designer.cs">
+      <DependentUpon>201902152137073_OriginAndTypeRenamedToOrganizationAndCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902161100585_CategoryRenamedToType.cs" />
+    <Compile Include="Migrations\201902161100585_CategoryRenamedToType.Designer.cs">
+      <DependentUpon>201902161100585_CategoryRenamedToType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902211228226_OrganizationCategoryHierarchyAndRecurrentFlag.cs" />
+    <Compile Include="Migrations\201902211228226_OrganizationCategoryHierarchyAndRecurrentFlag.Designer.cs">
+      <DependentUpon>201902211228226_OrganizationCategoryHierarchyAndRecurrentFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902240949407_OrganizationAccountRenamedToAutomationElement.cs" />
+    <Compile Include="Migrations\201902240949407_OrganizationAccountRenamedToAutomationElement.Designer.cs">
+      <DependentUpon>201902240949407_OrganizationAccountRenamedToAutomationElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MoneyManagerDatabaseInitializer.cs" />
+    <Compile Include="MoneyManagerDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511301543041_InitialMigration.resx">
+      <DependentUpon>201511301543041_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511301555183_Alerts.resx">
+      <DependentUpon>201511301555183_Alerts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511301904403_MandatoryAlertLink.resx">
+      <DependentUpon>201511301904403_MandatoryAlertLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602262101120_TransactionSourceAndType.resx">
+      <DependentUpon>201602262101120_TransactionSourceAndType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608310913058_TransactionOriginAmountAndTolerance.resx">
+      <DependentUpon>201608310913058_TransactionOriginAmountAndTolerance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609061255203_TransactionCategory.resx">
+      <DependentUpon>201609061255203_TransactionCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609241141338_RemovedIdentityTables.resx">
+      <DependentUpon>201609241141338_RemovedIdentityTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612031825345_AccountEnabledColumn.resx">
+      <DependentUpon>201612031825345_AccountEnabledColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612171251317_TransactionForecast.resx">
+      <DependentUpon>201612171251317_TransactionForecast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612290940200_TransactionForecastTolerance.resx">
+      <DependentUpon>201612290940200_TransactionForecastTolerance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612291332539_AlertsRemoved.resx">
+      <DependentUpon>201612291332539_AlertsRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703122232476_TransactionForecastHit.resx">
+      <DependentUpon>201703122232476_TransactionForecastHit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703231024396_TransactionForecastSimplified.resx">
+      <DependentUpon>201703231024396_TransactionForecastSimplified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707201717242_ImportHistoryAndDatabaseConstraints.resx">
+      <DependentUpon>201707201717242_ImportHistoryAndDatabaseConstraints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707241035274_ImportHistoryUserName.resx">
+      <DependentUpon>201707241035274_ImportHistoryUserName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708122309085_MandatoryTransactionCategory.resx">
+      <DependentUpon>201708122309085_MandatoryTransactionCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121714039_AutoRescheduleForecast.resx">
+      <DependentUpon>201709121714039_AutoRescheduleForecast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041959401_DateTimeOffestToDateTime.resx">
+      <DependentUpon>201710041959401_DateTimeOffestToDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804221648500_AccountTechnicalId.resx">
+      <DependentUpon>201804221648500_AccountTechnicalId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804231438182_TransactionOriginAccount.resx">
+      <DependentUpon>201804231438182_TransactionOriginAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031415018_UserCustomerAssociation.resx">
+      <DependentUpon>201805031415018_UserCustomerAssociation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806230757126_AccountFilter.resx">
+      <DependentUpon>201806230757126_AccountFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902061927577_AccountImportHistory.resx">
+      <DependentUpon>201902061927577_AccountImportHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902152137073_OriginAndTypeRenamedToOrganizationAndCategory.resx">
+      <DependentUpon>201902152137073_OriginAndTypeRenamedToOrganizationAndCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902161100585_CategoryRenamedToType.resx">
+      <DependentUpon>201902161100585_CategoryRenamedToType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211228226_OrganizationCategoryHierarchyAndRecurrentFlag.resx">
+      <DependentUpon>201902211228226_OrganizationCategoryHierarchyAndRecurrentFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902240949407_OrganizationAccountRenamedToAutomationElement.resx">
+      <DependentUpon>201902240949407_OrganizationAccountRenamedToAutomationElement.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Models\NBlackout.MoneyManager.Models.csproj">
+      <Project>{5F745A5D-0380-496C-994D-63C466E281B1}</Project>
+      <Name>NBlackout.MoneyManager.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

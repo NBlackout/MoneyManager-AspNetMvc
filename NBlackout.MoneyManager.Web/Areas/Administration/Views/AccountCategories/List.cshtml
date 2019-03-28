@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/AccountCategories/List/Bundle")
+
+<h3>@Resource.Labels_AccountCategories</h3>
+<div id="accountCategoriesListPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Administration.AccountCategories.List.DataGrid.init({
+            container: '#accountCategoriesListPartialContainer',
+            url: '@Url.Action("ListPartial")'
+        });
+
+        handleAccountCategoriesListEvents();
+    });
+</script>

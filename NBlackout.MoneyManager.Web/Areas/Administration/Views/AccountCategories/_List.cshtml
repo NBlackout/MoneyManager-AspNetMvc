@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AccountCategoryViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/AccountCategories/ListPartial/Bundle")
+
+<div id="accountCategoriesListPartialContent">
+    <div class="actions">
+        <button class="btn btn-default" data-action="create">@Resource.Labels_NewCategory</button>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().Label)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var accountCategoryByType in Model.GroupBy(m => m.Type).OrderBy(m => m.Key))
+                    {
+                        var key = accountCategoryByType.Key;
+                        var type = (int)key;
+                        var accountCategoryByTypeSelector = "[data-parent=\"" + type + "\"]";
+
+                        <tr data-target="@accountCategoryByTypeSelector" data-toggle="collapse">
+                            <td>
+                                <span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span>
+                            </td>
+                            <td>@key.DisplayName()</td>
+                            <td></td>
+                        </tr>
+
+                        foreach (var accountCategory in accountCategoryByType.OrderBy(m => m.Label))
+                        {
+                            <tr class="collapse" data-parent="@type">
+                                <td></td>
+                                <td>@accountCategory.Label</td>
+                                <td>
+                                    <a href="#" class="invisible" data-action="edit" data-id="@accountCategory.Id"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                    <a href="#" class="invisible" data-action="delete" data-id="@accountCategory.Id"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="accountCategoryDialog" title="@Resource.Titles_AccountCategoryEdition"></div>
+    <div id="deleteAccountCategoryDialog" title="@Resource.Titles_AccountCategoryDeletion"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Administration.AccountCategories.ListPartial.Crud.init({
+                container: '#accountCategoryDialog',
+                createUrl: '@Url.Action("Create")',
+                editUrl: '@Url.Action("Edit")',
+                deleteContainer: '#deleteAccountCategoryDialog',
+                deleteUrl: '@Url.Action("Delete")'
+            });
+
+            handleAccountCategoriesListPartialEvents();
+        });
+    </script>
+</div>

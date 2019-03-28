@@ -1,0 +1,75 @@
+﻿@model UserViewModel
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Security/User/Bundle")
+
+<h3>@Resource.Labels_AccountManagement</h3>
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-9">
+            <p class="form-control-static">@Html.DisplayFor(m => m.UserName)</p>
+        </div>
+    </div>  
+      <div class="form-group">
+        @Html.LabelFor(m => m.FullName, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-9">
+            <p class="form-control-static">@Html.DisplayFor(m => m.FullName)</p>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-9">
+            <p class="form-control-static">***** <a id="editPassword" href="#">@Resource.Actions_Edit</a></p>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-9">
+            <p class="form-control-static">@Html.DisplayFor(m => m.Email) <a id="editEmail" href="#">@Resource.Actions_Edit</a></p>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-9">
+            <p class="form-control-static">@Html.DisplayFor(m => m.PhoneNumber) <a id="editPhoneNumber" href="#">@Resource.Actions_Edit</a></p>
+        </div>
+    </div>
+</div>
+<div id="editPasswordDialog" title="@Resource.Titles_PasswordEdition" class="container-fluid"></div>
+<div id="editEmailDialog" title="@Resource.Titles_EmailEdition" class="container-fluid"></div>
+<div id="editPhoneNumberDialog" title="@Resource.Titles_PhoneNumberEdition" class="container-fluid"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Security.User.Password.init({
+            container: '#editPasswordDialog',
+            editUrl: '@Url.Action("EditPassword")',
+        });
+
+        NBlackout.MoneyManager.Security.User.Email.init({
+            container: '#editEmailDialog',
+            editUrl: '@Url.Action("EditEmail")'
+        });
+
+        NBlackout.MoneyManager.Security.User.PhoneNumber.init({
+            container: '#editPhoneNumberDialog',
+            editUrl: '@Url.Action("EditPhoneNumber")'
+        });
+
+        $('#editPassword').click(function(e) {
+            NBlackout.MoneyManager.Security.User.Password.edit();
+
+            e.preventDefault();
+        });
+
+        $('#editEmail').click(function(e) {
+            NBlackout.MoneyManager.Security.User.Email.edit();
+
+            e.preventDefault();
+        });
+
+        $('#editPhoneNumber').click(function(e) {
+            NBlackout.MoneyManager.Security.User.PhoneNumber.edit();
+
+            e.preventDefault();
+        });
+    });
+</script>

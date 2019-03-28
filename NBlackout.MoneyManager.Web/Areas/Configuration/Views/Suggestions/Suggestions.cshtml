@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/Classification/Suggestions/Bundle")
+
+<h3>@Resource.Labels_Suggestions</h3>
+<div id="classificationSuggestionsPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Administration.Classification.Suggestions.DataGrid.init({
+            container: '#classificationSuggestionsPartialContainer',
+            url: '@Url.Action("SuggestionsPartial")'
+        });
+
+        handleClassificationSuggestionsEvents();
+    });
+</script>

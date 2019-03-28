@@ -1,0 +1,10 @@
+﻿html { position: relative; min-height: 100%; }
+
+/* jQuery-UI */
+.ui-widget-overlay { z-index: 1030; }
+.ui-dialog { z-index: 1031; }
+.ui-dialog .ui-dialog-content { padding: 15px; }
+.ui-widget .btn { font-size: 14px; }
+
+/* jQuery-UI validate */
+.field-validation-valid { display: none; }

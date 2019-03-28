@@ -1,0 +1,108 @@
+﻿@model IEnumerable<OrganizationViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Organizations/ListPartial/Bundle")
+
+<div id="organizationsListPartialContent">
+    <div class="actions">
+        <button class="btn btn-default" data-action="create" data-target="organization">@Resource.Labels_NewOrganization</button>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().CategoryId)</th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().Label)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().AutomationElements.FirstOrDefault().Account.CustomerId)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().AutomationElements.FirstOrDefault().AccountId)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var organization in Model.OrderBy(m => m.Category.FullLabel).ThenBy(m => m.Label))
+                    {
+                        var id = organization.Id;
+                        var label = organization.Label;
+                        var category = organization.Category;
+                        var selector = "organization-" + id;
+                        var target = "#organizationsListPartialContent [data-parent=\"" + selector + "\"]";
+                        var childs = organization.AutomationElements;
+
+                        <tr data-selector="@selector" data-target="@target" data-toggle="collapse">
+                            <td>
+                                @if (childs.Any())
+                                {
+                                    <span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span>
+                                }
+                            </td>
+                            <td>@category.FullLabel</td>
+                            <td>@String.Format("{0}" + ((childs.Any()) ? " ({1})" : String.Empty), label, childs.Count())</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a href="#" class="invisible" data-action="create" data-target="automation-element" data-organization-id="@id"><span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="#" class="invisible" data-action="edit" data-target="organization" data-id="@id"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                <a href="#" class="invisible" data-action="delete" data-target="organization" data-id="@id"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                            </td>
+                        </tr>
+
+                        foreach (var child in childs.OrderBy(m => m.Account.Customer.FullName).ThenBy(m => m.Account.Title))
+                        {
+                            var childId = child.Id;
+
+                            <tr class="collapse" data-parent="@selector" data-toggle="collapse">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@child.Account.Customer.FullName</td>
+                                <td>@child.Account.Title</td>
+                                <td>
+                                    <a href="#" class="invisible" data-action="edit" data-target="automation-element" data-id="@childId"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                    <a href="#" class="invisible" data-action="delete" data-target="automation-element" data-id="@childId"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="actions">
+            <button class="btn btn-default" data-action="create">@Resource.Labels_NewOrganization</button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="organizationDialog" title="@Resource.Titles_OrganizationEdition"></div>
+    <div id="deleteOrganizationDialog" title="@Resource.Titles_OrganizationDeletion"></div>
+    <div id="automationElementDialog" title="@Resource.Titles_AutomationElementEdition"></div>
+    <div id="deleteAutomationElementDialog" title="@Resource.Titles_AutomationElementDeletion"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Configuration.Organizations.ListPartial.Crud.init({
+                container: '#organizationDialog',
+                createUrl: '@Url.Action("Create")',
+                editUrl: '@Url.Action("Edit")',
+                deleteContainer: '#deleteOrganizationDialog',
+                deleteUrl: '@Url.Action("Delete")'
+            });
+
+            NBlackout.MoneyManager.Configuration.Organizations.ListPartial.AutomationElements.init({
+                container: '#automationElementDialog',
+                createUrl: '@Url.Action("CreateAutomationElement")',
+                editUrl: '@Url.Action("EditAutomationElement")',
+                deleteContainer: '#deleteAutomationElementDialog',
+                deleteUrl: '@Url.Action("DeleteAutomationElement")'
+            });
+
+            handleOrganizationsListPartialEvents();
+        });
+    </script>
+</div>

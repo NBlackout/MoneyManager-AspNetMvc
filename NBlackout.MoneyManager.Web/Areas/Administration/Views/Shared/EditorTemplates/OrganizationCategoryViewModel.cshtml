@@ -1,0 +1,57 @@
+﻿@model OrganizationCategoryViewModel
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("Label")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Label, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Label, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Label, null, new { @class = "help-block" })
+    </div>
+</div>
+@if (Model.Id == 0)
+{
+    if (Model.CategoryId.HasValue)
+    {
+        <div class="form-group @((!ViewData.ModelState.IsValidField("CategoryId")) ? "has-error" : "")">
+            @Html.LabelFor(m => m.CategoryId, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-9">
+                @Html.HiddenFor(m => m.CategoryId)
+                @Html.TextBoxFor(m => m.Category.Label, new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "help-block" })
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="form-group @((!ViewData.ModelState.IsValidField("CategoryId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.CategoryId, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-9">
+            @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories.OrderByDescending(m => m.Type).ThenBy(m => m.FullLabel), "Id", "FullLabel", Model.CategoryId), new { @class = "select2lol form-control" })
+            @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "help-block" })
+        </div>
+    </div>
+}
+<div class="form-group">
+    @Html.LabelFor(m => m.Type, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.Type, TransactionTypeViewModel.Expenditure, new { @checked = "checked" })
+            @TransactionTypeViewModel.Expenditure.DisplayName()
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.Type, TransactionTypeViewModel.Income)
+            @TransactionTypeViewModel.Income.DisplayName()
+        </label>
+        @Html.ValidationMessageFor(m => m.Type, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.Recurrent)
+                @Html.DisplayNameFor(m => m.Recurrent)
+            </label>
+        </div>
+    </div>
+</div>

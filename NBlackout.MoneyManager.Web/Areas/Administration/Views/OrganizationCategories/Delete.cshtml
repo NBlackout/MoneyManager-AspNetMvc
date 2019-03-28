@@ -1,0 +1,33 @@
+﻿@model ReassignOrganizationCategoryViewModel
+
+<p>@Html.Raw(Resource.Messages_DeleteOrganizationCategory)</p>
+@using (Html.BeginForm("ConfirmDelete", "OrganizationCategories", FormMethod.Post, new { id = "confirmDeleteOrganizationCategoryForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.SourceCategoryId)
+
+    <div class="form-group @((!ViewData.ModelState.IsValidField("TargetCategoryId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.TargetCategoryId, Resource.Messages_ChooseNewOrganizationCategory)
+        @Html.DropDownListFor(m => m.TargetCategoryId, new SelectList(Model.Categories.OrderBy(t => t.Type).ThenBy(t => t.FullLabel), "Id", "FullLabel", "TypeDisplayName", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TargetCategoryId, null, new { @class = "help-block" })
+    </div>
+    <button class="btn btn-default">@Resource.Actions_Delete</button>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#confirmDeleteOrganizationCategoryForm').submit(function() {
+            NBlackout.MoneyManager.Administration.OrganizationCategories.ListPartial.Crud.confirmDeletion({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_DeletionDone'
+                    });
+
+                    $(document).trigger('organization-categories-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

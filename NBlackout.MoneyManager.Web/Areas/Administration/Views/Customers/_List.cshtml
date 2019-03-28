@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CustomerViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/Customers/ListPartial/Bundle")
+
+<div id="customersListPartialContent">
+    <div class="actions">
+        <button class="btn btn-default" data-action="create">@Resource.Labels_NewCustomer</button>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().FirstName)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().LastName)</th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().FullName)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var customer in Model.OrderBy(m => m.LastName).ThenBy(m => m.FirstName))
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@customer.FirstName</td>
+                            <td>@customer.LastName</td>
+                            <td>@customer.FullName</td>
+                            <td>
+                                <a href="#" class="invisible" data-action="edit" data-id="@customer.Id"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                <a href="#" class="invisible" data-action="delete" data-id="@customer.Id"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="customerDialog" title="@Resource.Titles_CustomerEdition"></div>
+    <div id="deleteCustomerDialog" title="@Resource.Titles_CustomerDeletion"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Administration.Customers.ListPartial.Crud.init({
+                container: '#customerDialog',
+                createUrl: '@Url.Action("Create")',
+                editUrl: '@Url.Action("Edit")',
+                deleteContainer: '#deleteCustomerDialog',
+                deleteUrl: '@Url.Action("Delete")'
+            });
+
+            handleCustomersListPartialEvents();
+        });
+    </script>
+</div>

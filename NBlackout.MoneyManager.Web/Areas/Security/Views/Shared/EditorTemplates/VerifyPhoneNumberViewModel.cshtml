@@ -1,0 +1,11 @@
+﻿@model VerifyPhoneNumberViewModel
+
+@Html.HiddenFor(m => m.PhoneNumber)
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("Code")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Code, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Code, null, new { @class = "help-block" })
+    </div>
+</div>

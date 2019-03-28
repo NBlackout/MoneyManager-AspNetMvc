@@ -1,0 +1,32 @@
+﻿@using System.Globalization;
+@{
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+<!DOCTYPE html>
+<html lang="@lang">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="~/Content/Styles/nblackout/money-manager/images/icon.png">
+    <title>@Resource.Titles_MoneyManager</title>
+    @Styles.Render("~/Content/Styles/Bootstrap/Bundle")
+    @Styles.Render("~/Content/Styles/jQuery-UI/Bundle")
+    @Styles.Render("~/Content/Styles/NBlackout/MoneyManager/Bundle")
+    @RenderSection("Styles", false)
+    @Scripts.Render("~/Scripts/jQuery/Bundle")
+    @Scripts.Render("~/Scripts/Bootstrap/Bundle")
+    @Scripts.Render("~/Scripts/jQuery-UI/Bundle")
+    @Scripts.Render("~/Scripts/jQuery-Noty/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/Bundle")
+    @RenderSection("Scripts", false)
+</head>
+<body>
+    <div id="pageContainer">
+        <div id="authenticationContainer">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

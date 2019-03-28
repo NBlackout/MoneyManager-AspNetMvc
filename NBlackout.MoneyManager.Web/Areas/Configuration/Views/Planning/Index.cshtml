@@ -1,0 +1,20 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Planning/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Planning/Index/Bundle")
+
+<div id="planningSuggestionsContainer"></div>
+<div id="planningForecastHitsContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.Planning.Index.Suggestions.init({
+            container: '#planningSuggestionsContainer',
+            url: '@Url.Action("Suggestions")'
+        });
+
+        NBlackout.MoneyManager.Configuration.Planning.Index.ForecastHits.init({
+            container: '#planningForecastHitsContainer',
+            url: '@Url.Action("ForecastHits")'
+        });
+
+        handlePlanningIndexEvents();
+    });
+</script>

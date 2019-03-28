@@ -1,0 +1,16 @@
+﻿@model AccountCategoryViewModel
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("OrganizationId")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Type, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.EnumDropDownListFor(m => m.Type, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Type, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("Label")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Label, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Label, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Label, null, new { @class = "help-block" })
+    </div>
+</div>

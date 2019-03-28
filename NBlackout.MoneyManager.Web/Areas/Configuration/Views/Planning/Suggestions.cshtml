@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Planning/Suggestions/Bundle")
+
+<h3>@Resource.Labels_Suggestions</h3>
+<div id="planningSuggestionsPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.Planning.Suggestions.DataGrid.init({
+            container: '#planningSuggestionsPartialContainer',
+            url: '@Url.Action("SuggestionsPartial")'
+        });
+
+        handlePlanningSuggestionsEvents();
+    });
+</script>

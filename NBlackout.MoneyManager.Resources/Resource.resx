@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions_AffectOrganization" xml:space="preserve">
+    <value>Leur affecter une organisme</value>
+  </data>
+  <data name="Actions_Choose" xml:space="preserve">
+    <value>Choisir</value>
+  </data>
+  <data name="Actions_Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Actions_DisableAutoReschedule" xml:space="preserve">
+    <value>Désactiver la répétition</value>
+  </data>
+  <data name="Actions_Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Actions_EnableAutoReschedule" xml:space="preserve">
+    <value>Activer la répétion</value>
+  </data>
+  <data name="Actions_Import" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="Actions_Reschedule" xml:space="preserve">
+    <value>Replanifier</value>
+  </data>
+  <data name="Actions_RescheduleAll" xml:space="preserve">
+    <value>Tout replanifier</value>
+  </data>
+  <data name="Actions_ReSend" xml:space="preserve">
+    <value>Réenvoyer</value>
+  </data>
+  <data name="Actions_Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Actions_Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Actions_ShowAll" xml:space="preserve">
+    <value>Tout afficher</value>
+  </data>
+  <data name="Actions_SignIn" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="Actions_SignOut" xml:space="preserve">
+    <value>Se déconnecter</value>
+  </data>
+  <data name="Actions_Validate" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="Actions_ValidateAll" xml:space="preserve">
+    <value>Tout valider</value>
+  </data>
+  <data name="Labels_Account" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="Labels_AccountActivity" xml:space="preserve">
+    <value>Activité du compte</value>
+  </data>
+  <data name="Labels_AccountCategories" xml:space="preserve">
+    <value>Categories de compte</value>
+  </data>
+  <data name="Labels_AccountDetails" xml:space="preserve">
+    <value>Détails du compte</value>
+  </data>
+  <data name="Labels_AccountManagement" xml:space="preserve">
+    <value>Gestion du compte</value>
+  </data>
+  <data name="Labels_Accounts" xml:space="preserve">
+    <value>Comptes</value>
+  </data>
+  <data name="Labels_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Labels_Activity" xml:space="preserve">
+    <value>Activité</value>
+  </data>
+  <data name="Labels_Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Labels_Amount" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="Labels_AutoReschedule" xml:space="preserve">
+    <value>Auto-replanification</value>
+  </data>
+  <data name="Labels_Balance" xml:space="preserve">
+    <value>Solde</value>
+  </data>
+  <data name="Labels_BeginDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Labels_Categories" xml:space="preserve">
+    <value>Catégories</value>
+  </data>
+  <data name="Labels_Category" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="Labels_CertificateOfDeposit" xml:space="preserve">
+    <value>Livrets</value>
+  </data>
+  <data name="Labels_Checking" xml:space="preserve">
+    <value>Comptes chèques</value>
+  </data>
+  <data name="Labels_Classification" xml:space="preserve">
+    <value>Classification</value>
+  </data>
+  <data name="Labels_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Labels_Configuration" xml:space="preserve">
+    <value>Paramétrage</value>
+  </data>
+  <data name="Labels_Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="Labels_Connection" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="Labels_Consultation" xml:space="preserve">
+    <value>Consultation</value>
+  </data>
+  <data name="Labels_Customer" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Labels_Customers" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Labels_Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Labels_DataManagement" xml:space="preserve">
+    <value>Gestion des données</value>
+  </data>
+  <data name="Labels_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Labels_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Labels_Details" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="Labels_Duration" xml:space="preserve">
+    <value>Durée (ms)</value>
+  </data>
+  <data name="Labels_Email" xml:space="preserve">
+    <value>Adresse email</value>
+  </data>
+  <data name="Labels_Enabled" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="Labels_EndDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="Labels_EstimatedBalanceByEndOfMonth" xml:space="preserve">
+    <value>Solde estimé en fin de mois</value>
+  </data>
+  <data name="Labels_ExpectedAmount" xml:space="preserve">
+    <value>Montant attendu</value>
+  </data>
+  <data name="Labels_ExpectedDate" xml:space="preserve">
+    <value>Date attendue</value>
+  </data>
+  <data name="Labels_Expenditure" xml:space="preserve">
+    <value>Charges</value>
+  </data>
+  <data name="Labels_File" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
+  <data name="Labels_FileName" xml:space="preserve">
+    <value>Nom du fichier</value>
+  </data>
+  <data name="Labels_FirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Labels_FullName" xml:space="preserve">
+    <value>Nom complet</value>
+  </data>
+  <data name="Labels_Home" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="Labels_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Labels_ImportHistories" xml:space="preserve">
+    <value>Historique des imports</value>
+  </data>
+  <data name="Labels_Income" xml:space="preserve">
+    <value>Revenus</value>
+  </data>
+  <data name="Labels_Label" xml:space="preserve">
+    <value>Intitulé</value>
+  </data>
+  <data name="Labels_LastName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Labels_LastSynchronization" xml:space="preserve">
+    <value>Dernière synchronisation</value>
+  </data>
+  <data name="Labels_NewCategory" xml:space="preserve">
+    <value>Nouvelle catégorie</value>
+  </data>
+  <data name="Labels_NewCustomer" xml:space="preserve">
+    <value>Nouveau client</value>
+  </data>
+  <data name="Labels_NewForecast" xml:space="preserve">
+    <value>Nouvel élément</value>
+  </data>
+  <data name="Labels_NewHit" xml:space="preserve">
+    <value>Nouvelle occurence</value>
+  </data>
+  <data name="Labels_NewOrganization" xml:space="preserve">
+    <value>Nouvel organisme</value>
+  </data>
+  <data name="Labels_NewAutomationElement" xml:space="preserve">
+    <value>Nouvelle association</value>
+  </data>
+  <data name="Labels_No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Labels_NotRegular" xml:space="preserve">
+    <value>Non régulière</value>
+  </data>
+  <data name="Labels_NotSpecified" xml:space="preserve">
+    <value>Non renseigné</value>
+  </data>
+  <data name="Labels_Number" xml:space="preserve">
+    <value>Numéro</value>
+  </data>
+  <data name="Labels_OldPassword" xml:space="preserve">
+    <value>Ancien mot de passe</value>
+  </data>
+  <data name="Labels_Organization" xml:space="preserve">
+    <value>Organisme</value>
+  </data>
+  <data name="Labels_Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="Labels_Others" xml:space="preserve">
+    <value>Autres</value>
+  </data>
+  <data name="Labels_Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Labels_Pattern" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="Labels_PhoneNumber" xml:space="preserve">
+    <value>Numéro de téléphone</value>
+  </data>
+  <data name="Labels_Planning" xml:space="preserve">
+    <value>Planification</value>
+  </data>
+  <data name="Labels_Provider" xml:space="preserve">
+    <value>Fournisseur</value>
+  </data>
+  <data name="Labels_RealAmount" xml:space="preserve">
+    <value>Montant réel</value>
+  </data>
+  <data name="Labels_RealDate" xml:space="preserve">
+    <value>Date réelle</value>
+  </data>
+  <data name="Labels_Recurrent" xml:space="preserve">
+    <value>Récurrent</value>
+  </data>
+  <data name="Labels_Saving" xml:space="preserve">
+    <value>Comptes épargnes</value>
+  </data>
+  <data name="Labels_Search" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="Labels_SearchCriterias" xml:space="preserve">
+    <value>Critères de recherche</value>
+  </data>
+  <data name="Labels_Suggestions" xml:space="preserve">
+    <value>Suggestions</value>
+  </data>
+  <data name="Labels_Title" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="Labels_Token" xml:space="preserve">
+    <value>Jeton</value>
+  </data>
+  <data name="Labels_Tolerance" xml:space="preserve">
+    <value>Tolérance</value>
+  </data>
+  <data name="Labels_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Labels_TransactionForecasts" xml:space="preserve">
+    <value>Transactions planifiées</value>
+  </data>
+  <data name="Labels_Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="Labels_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Labels_User" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="Labels_UserName" xml:space="preserve">
+    <value>Identifiant</value>
+  </data>
+  <data name="Labels_Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="Messages_AccountRequired" xml:space="preserve">
+    <value>Compte requis</value>
+  </data>
+  <data name="Messages_ChooseNewAccountCategory" xml:space="preserve">
+    <value>Choisissez un nouveau category pour les comptes affectés</value>
+  </data>
+  <data name="Messages_ChooseNewCustomer" xml:space="preserve">
+    <value>Choisissez un nouveau client pour les comptes affectés</value>
+  </data>
+  <data name="Messages_ChooseNewOrganization" xml:space="preserve">
+    <value>Choisissez un nouvel organisme pour les transactions affectées</value>
+  </data>
+  <data name="Messages_ChooseNewOrganizationCategory" xml:space="preserve">
+    <value>Choisissez un nouveau category de transaction pour les organismes affectées</value>
+  </data>
+  <data name="Messages_CodeInvalid" xml:space="preserve">
+    <value>Code invalide</value>
+  </data>
+  <data name="Messages_CodeRequired" xml:space="preserve">
+    <value>Code requis</value>
+  </data>
+  <data name="Messages_ConfirmationRequired" xml:space="preserve">
+    <value>Confirmation requise</value>
+  </data>
+  <data name="Messages_ConfirmEmailChange" xml:space="preserve">
+    <value>Veuillez confirmer votre changement d'adresse email en cliquant sur le lien suivant : &lt;a href="{0}"&gt;Confirmation&lt;/a&gt;</value>
+  </data>
+  <data name="Messages_CreationDone" xml:space="preserve">
+    <value>Création effectuée</value>
+  </data>
+  <data name="Messages_DeleteAccountCategory" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; un category de compte. Êtes-vous sûr ?</value>
+  </data>
+  <data name="Messages_DeleteCustomer" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; un client. Êtes-vous sûr ?</value>
+  </data>
+  <data name="Messages_DeleteForecast" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; un élément de planification. Êtes-vous sûr ?</value>
+  </data>
+  <data name="Messages_DeleteHit" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; une occurence de transaction planifiée. Êtes-vous sûr ?</value>
+  </data>
+  <data name="Messages_DeleteOrganization" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; une organisme de transaction. Si vous la supprimez, chaque transaction qui la référence doit être &lt;strong&gt;réassignée&lt;/strong&gt;.</value>
+  </data>
+  <data name="Messages_DeleteAutomationElement" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; une association entre un compte et une organisme de transaction. Êtes-vous sûr ?</value>
+  </data>
+  <data name="Messages_DeleteOrganizationCategory" xml:space="preserve">
+    <value>Vous avez choisi de &lt;strong&gt;supprimer&lt;/strong&gt; un category de transaction. Si vous le supprimez, chaque organisme de transaction qui le référence doit être &lt;strong&gt;réassignée&lt;/strong&gt;.</value>
+  </data>
+  <data name="Messages_DeletionDone" xml:space="preserve">
+    <value>Suppression effectuée</value>
+  </data>
+  <data name="Messages_EmailChangeConfirmation" xml:space="preserve">
+    <value>Confirmation de votre changement d'adresse email</value>
+  </data>
+  <data name="Messages_EmailInvalid" xml:space="preserve">
+    <value>Adresse email au format incorrect</value>
+  </data>
+  <data name="Messages_EmailNotMatchingConfirmation" xml:space="preserve">
+    <value>La nouvelle adresse email et sa confirmation ne correspondent pas</value>
+  </data>
+  <data name="Messages_EmailRequired" xml:space="preserve">
+    <value>Adresse email requise</value>
+  </data>
+  <data name="Messages_FirstNameRequired" xml:space="preserve">
+    <value>Prénom requis</value>
+  </data>
+  <data name="Messages_LabelLength" xml:space="preserve">
+    <value>L'intitulé doit être composé d'au moins 3 caractères</value>
+  </data>
+  <data name="Messages_LabelRequired" xml:space="preserve">
+    <value>Intitulé requis</value>
+  </data>
+  <data name="Messages_LastNameRequired" xml:space="preserve">
+    <value>Nom requis</value>
+  </data>
+  <data name="Messages_ModificationDone" xml:space="preserve">
+    <value>Modification effectuée</value>
+  </data>
+  <data name="Messages_ModificationsDone" xml:space="preserve">
+    <value>Modifications effectuées</value>
+  </data>
+  <data name="Messages_MoveAlong" xml:space="preserve">
+    <value>Circulez, il n'y a rien à voir (littéralement) ! Il est grand temps de corriger ça :</value>
+  </data>
+  <data name="Messages_NoDataFound" xml:space="preserve">
+    <value>Aucune donnée trouvée</value>
+  </data>
+  <data name="Messages_NumberRequired" xml:space="preserve">
+    <value>Numéro requis</value>
+  </data>
+  <data name="Messages_OldPasswordRequired" xml:space="preserve">
+    <value>Ancien mot de passe requis</value>
+  </data>
+  <data name="Messages_OrganizationOrLabelRequired" xml:space="preserve">
+    <value>Organisme ou intitulé requis</value>
+  </data>
+  <data name="Messages_OrganizationRequired" xml:space="preserve">
+    <value>Organisme requise</value>
+  </data>
+  <data name="Messages_PasswordNotMatchingConfirmation" xml:space="preserve">
+    <value>Le nouveau mot de passe et sa confirmation ne correspondent pas</value>
+  </data>
+  <data name="Messages_PasswordRequired" xml:space="preserve">
+    <value>Mot de passe requis</value>
+  </data>
+  <data name="Messages_PhoneNumberInvalid" xml:space="preserve">
+    <value>Numéro de téléphone au format incorrect</value>
+  </data>
+  <data name="Messages_PhoneNumberNotMatchingConfirmation" xml:space="preserve">
+    <value>Le nouveau numéro de téléphone et sa confirmation ne correspondent pas</value>
+  </data>
+  <data name="Messages_PhoneNumberRequired" xml:space="preserve">
+    <value>Numéro de téléphone requis</value>
+  </data>
+  <data name="Messages_ProviderRequired" xml:space="preserve">
+    <value>Fournisseur requis</value>
+  </data>
+  <data name="Messages_ProviderUnavailable" xml:space="preserve">
+    <value>Fournisseur indisponible</value>
+  </data>
+  <data name="Messages_SecurityCode" xml:space="preserve">
+    <value>Votre code de securité est : {0}</value>
+  </data>
+  <data name="Messages_SendingTwoFactorCode" xml:space="preserve">
+    <value>Sending two-factor code using {0} to {1}</value>
+  </data>
+  <data name="Messages_SourceCategoryRequired" xml:space="preserve">
+    <value>Categorie source requise</value>
+  </data>
+  <data name="Messages_SourceCustomerRequired" xml:space="preserve">
+    <value>Client source requis</value>
+  </data>
+  <data name="Messages_SourceOrganizationRequired" xml:space="preserve">
+    <value>Organisme source requise</value>
+  </data>
+  <data name="Messages_TargetCategoryRequired" xml:space="preserve">
+    <value>Categorie cible requise</value>
+  </data>
+  <data name="Messages_TitleRequired" xml:space="preserve">
+    <value>Titre requis</value>
+  </data>
+  <data name="Messages_TokenInvalid" xml:space="preserve">
+    <value>Jeton invalide</value>
+  </data>
+  <data name="Messages_TokenRequired" xml:space="preserve">
+    <value>Jeton requis</value>
+  </data>
+  <data name="Messages_TransactionInserted" xml:space="preserve">
+    <value>transaction(s) insérée(s)</value>
+  </data>
+  <data name="Messages_TypeRequired" xml:space="preserve">
+    <value>Type requis</value>
+  </data>
+  <data name="Messages_UserNameOrPasswordInvalid" xml:space="preserve">
+    <value>Identifiant ou mot de passe incorrect</value>
+  </data>
+  <data name="Messages_UserNameRequired" xml:space="preserve">
+    <value>Identifiant requis</value>
+  </data>
+  <data name="Messages_UserRequired" xml:space="preserve">
+    <value>Utilisateur requis</value>
+  </data>
+  <data name="Messages_UserRequiresTfaVerification" xml:space="preserve">
+    <value>{0} requires TFA verification</value>
+  </data>
+  <data name="Titles_AccountCategoryDeletion" xml:space="preserve">
+    <value>Suppression de la catégorie de compte</value>
+  </data>
+  <data name="Titles_AccountCategoryEdition" xml:space="preserve">
+    <value>Édition de la catégorie de compte</value>
+  </data>
+  <data name="Titles_AccountEdition" xml:space="preserve">
+    <value>Édition d'un compte</value>
+  </data>
+  <data name="Titles_CustomerDeletion" xml:space="preserve">
+    <value>Suppression du client</value>
+  </data>
+  <data name="Titles_CustomerEdition" xml:space="preserve">
+    <value>Édition du client</value>
+  </data>
+  <data name="Titles_EmailEdition" xml:space="preserve">
+    <value>Édition de l'adresse email</value>
+  </data>
+  <data name="Titles_ForecastDeletion" xml:space="preserve">
+    <value>Suppression de l'élément de planification</value>
+  </data>
+  <data name="Titles_ForecastEdition" xml:space="preserve">
+    <value>Édition de l'élément de planification</value>
+  </data>
+  <data name="Titles_HitDeletion" xml:space="preserve">
+    <value>Suppression de l'occrurence de transaction planifiée</value>
+  </data>
+  <data name="Titles_HitEdition" xml:space="preserve">
+    <value>Édition de l'occurence de transaction planifiée</value>
+  </data>
+  <data name="Titles_MoneyManager" xml:space="preserve">
+    <value>Money Manager</value>
+  </data>
+  <data name="Titles_AutomationElementDeletion" xml:space="preserve">
+    <value>Suppression de l'association entre le compte et l'organisme de transaction</value>
+  </data>
+  <data name="Titles_AutomationElementEdition" xml:space="preserve">
+    <value>Édition de l'association entre un compte et une organisme de transaction</value>
+  </data>
+  <data name="Titles_OrganizationCategoryDeletion" xml:space="preserve">
+    <value>Suppression de la catégorie d'organisme</value>
+  </data>
+  <data name="Titles_OrganizationCategoryEdition" xml:space="preserve">
+    <value>Édition de la catégorie d'organisme</value>
+  </data>
+  <data name="Titles_OrganizationDeletion" xml:space="preserve">
+    <value>Suppression de l'organisme</value>
+  </data>
+  <data name="Titles_OrganizationEdition" xml:space="preserve">
+    <value>Édition de l'organisme</value>
+  </data>
+  <data name="Titles_PasswordEdition" xml:space="preserve">
+    <value>Édition du mot de passe</value>
+  </data>
+  <data name="Titles_PhoneNumberEdition" xml:space="preserve">
+    <value>Édition du numéro de téléphone</value>
+  </data>
+  <data name="Titles_TransactionEdition" xml:space="preserve">
+    <value>Édition d'une transaction</value>
+  </data>
+  <data name="Labels_Organizations" xml:space="preserve">
+    <value>Organismes</value>
+  </data>
+</root>

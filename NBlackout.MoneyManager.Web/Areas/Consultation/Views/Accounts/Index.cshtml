@@ -1,0 +1,18 @@
+﻿@model long
+    
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Accounts/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Accounts/Index/Bundle")
+
+<div id="accountsListContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Consultation.Accounts.CurrentAccountId = @Model;
+
+        NBlackout.MoneyManager.Consultation.Accounts.Index.List.init({
+            container: '#accountsListContainer',
+            url: '@Url.Action("List")'
+        });
+
+        handleAccountsIndexEvents();
+    });
+</script>

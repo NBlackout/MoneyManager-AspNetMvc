@@ -1,0 +1,33 @@
+﻿@model ReassignCustomerViewModel
+
+<p>@Html.Raw(Resource.Messages_DeleteCustomer)</p>
+@using (Html.BeginForm("ConfirmDelete", "Customers", FormMethod.Post, new { id = "confirmDeleteCustomerForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.SourceCustomerId)
+
+    <div class="form-group @((!ViewData.ModelState.IsValidField("TargetCustomerId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.TargetCustomerId, Resource.Messages_ChooseNewCustomer)
+        @Html.DropDownListFor(m => m.TargetCustomerId, new SelectList(Model.Customers.OrderBy(t => t.LastName).ThenBy(t => t.FirstName), "Id", "FullName", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TargetCustomerId, null, new { @class = "help-block" })
+    </div>
+    <button class="btn btn-default">@Resource.Actions_Delete</button>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#confirmDeleteCustomerForm').submit(function() {
+            NBlackout.MoneyManager.Administration.Customers.ListPartial.Crud.confirmDeletion({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_DeletionDone'
+                    });
+
+                    $(document).trigger('customers-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,32 @@
+﻿@model AccountViewModel
+
+@using (Html.BeginForm("Save", "Accounts", FormMethod.Post, new { id = "editAccountForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#editAccountForm').submit(function() {
+            NBlackout.MoneyManager.Configuration.Accounts.ListPartial.Crud.save({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_ModificationDone'
+                    });
+
+                    $(document).trigger('accounts-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

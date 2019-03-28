@@ -1,0 +1,6 @@
+﻿@model VerifyEmailViewModel
+
+@Html.ValidationMessageFor(m => m.UserId, null, new { @class = "help-block" })
+@Html.ValidationMessageFor(m => m.Token, null, new { @class = "help-block" })
+
+<a href="@Url.Action("Index", "Main")" class="btn btn-primary">@Resource.Labels_Home</a>

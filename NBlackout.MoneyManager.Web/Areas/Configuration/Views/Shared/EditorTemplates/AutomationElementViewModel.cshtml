@@ -1,0 +1,97 @@
+﻿@model AutomationElementViewModel
+
+@{
+    var tagifyTags = Model.Tags.Select(t => new { id = t.Id, value = t.Label });
+}
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("OrganizationId")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.OrganizationId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @if (Model.Id == 0)
+        {
+            @Html.HiddenFor(m => m.OrganizationId)
+            @Html.TextBoxFor(m => m.Organization.Label, new { @class = "form-control", @disabled = "disabled" })
+        }
+        else
+        {
+            @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.Organizations.OrderBy(m => m.Category.Type).ThenBy(m => m.Label), "Id", "Label", "Category.TypeDisplayName", 0), new { @class = "form-control" })
+        }
+
+        @Html.ValidationMessageFor(m => m.OrganizationId, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("AccountId")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.AccountId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.DropDownListFor(m => m.AccountId, new SelectList(Model.Accounts.OrderBy(m => m.Category.Label).ThenBy(m => m.Title), "Id", "Title", "Category.Label", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AccountId, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("Amount")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Amount, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-4">
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+            <span class="input-group-addon">€</span>
+        </div>
+        @Html.ValidationMessageFor(m => m.Amount, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("Tolerance")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Tolerance, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">±</span>
+            @Html.TextBoxFor(m => m.Tolerance, new { @class = "form-control" })
+            <span class="input-group-addon">€</span>
+        </div>
+        @Html.ValidationMessageFor(m => m.Tolerance, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("SelectedTags")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Tags, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @for (var i = 0; i < Model.Tags.LongCount(); i++)
+        {
+            @Html.HiddenFor(m => m.Tags[i].Id, new { @class = "tag-id" })
+            @Html.HiddenFor(m => m.Tags[i].Label, new { @class = "tag-label" })
+            @Html.HiddenFor(m => m.Tags[i].AutomationElementId, new { @class = "tag-automation-element-id" })
+        }
+
+        @Html.HiddenFor(m => m.Tags, new { Value = Html.Raw(Json.Encode(tagifyTags)), id = "tags", @disabled = "disabled", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Tags, null, new { @class = "help-block" })
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('#tags').tagify({
+            mapValueToProp: 'id'
+        });
+
+        $('#tags').on('add', function(e, tag) {
+            var tagData = tag.data;
+
+            var lastTagIdInput = $('.tag-id').last();
+            var lastTagIdInputName = lastTagIdInput.attr('name');
+            var tagIdInputName = lastTagIdInputName.replace(/\d+/, function(n) { return ++n; });
+            var tagIdInput = lastTagIdInput.clone();
+
+            var lastTagLabelInput = $('.tag-label').last();
+            var lastTagLabelInputName = lastTagLabelInput.attr('name');
+            var tagLabelInputName = lastTagLabelInputName.replace(/\d+/, function(n) { return ++n; });
+            var tagLabelInput = lastTagLabelInput.clone();
+
+            var lastTagAutomationElementIdInput = $('.tag-automation-element-id').last();
+            var lastTagAutomationElementIdInputName = lastTagAutomationElementIdInput.attr('name');
+            var tagAutomationElementIdInputName = lastTagAutomationElementIdInputName.replace(/\d+/, function(n) { return ++n; });
+            var tagAutomationElementIdInput = lastTagAutomationElementIdInput.clone();
+
+            tagIdInput.attr('name', tagIdInputName).val(0).insertAfter(lastTagIdInput);
+            tagLabelInput.attr('name', tagLabelInputName).val(tagData.value).insertAfter(lastTagLabelInput);
+            tagAutomationElementIdInput.attr('name', tagAutomationElementIdInputName).insertAfter(lastTagAutomationElementIdInput);
+        }).on('remove', function(e, tag) {
+            var tagData = tag.data;
+            var tagId = tagData.id;
+        });
+    });
+</script>

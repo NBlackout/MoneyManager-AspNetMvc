@@ -1,0 +1,31 @@
+﻿@model CustomerViewModel
+
+@using (Html.BeginForm("Save", "Customers", FormMethod.Post, new { id = "createCustomerForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#createCustomerForm').submit(function() {
+            NBlackout.MoneyManager.Administration.Customers.ListPartial.Crud.save({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_CreationDone'
+                    });
+
+                    $(document).trigger('customers-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

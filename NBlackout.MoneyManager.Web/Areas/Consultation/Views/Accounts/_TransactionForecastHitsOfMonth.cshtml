@@ -1,0 +1,155 @@
+﻿@model IEnumerable<TransactionForecastHitViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Accounts/TransactionForecastHitsOfMonthPartial/Bundle")
+
+<div id="accountsTransactionForecastHitsOfMonthPartialContent">
+    @if (Model.Any())
+    {
+        var total = Model.Sum(t => (t.Forecast.AutomationElement != null) ? t.Forecast.AutomationElement.Amount : 0m);
+
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().Forecast.Organization.Label)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Forecast.AutomationElement.Amount)</th>
+                        <th class="hidden-xs">@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                @foreach (var transactionForecastHitsByType in Model.GroupBy(m => m.Forecast.Organization.Category).GroupBy(m => m.Key.Type).OrderBy(m => m.Key.DisplayName()))
+                {
+                    var type = transactionForecastHitsByType.Key;
+                    var typeTotal = transactionForecastHitsByType.Sum(t => t.Sum(m => (m.Forecast.AutomationElement != null) ? m.Forecast.AutomationElement.Amount : 0m));
+
+                    <tbody>
+                        @foreach (var transactionForecastHitsByCategory in transactionForecastHitsByType.OrderBy(m => m.Key == null).ThenBy(m => (m.Key != null) ? m.Key.Label : String.Empty))
+                        {
+                            var category = transactionForecastHitsByCategory.Key;
+                            var categorySelector = String.Format("category-{0}", (category != null) ? category.Id : 0);
+                            var categoryTarget = "#accountsTransactionForecastHitsOfMonthPartialContent [data-parent=\"" + categorySelector + "\"]";
+                            var categoryLabel = (category != null) ? category.Label : Resource.Labels_Other;
+                            var categoryTotal = transactionForecastHitsByCategory.Sum(m => (m.Forecast.AutomationElement != null) ? m.Forecast.AutomationElement.Amount : 0m);
+
+                            <tr data-selector="@categorySelector" data-target="@categoryTarget" data-toggle="collapse">
+                                <td>
+                                    <span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span>
+                                </td>
+                                <td>
+                                    @if (category != null)
+                                    {
+                                        switch (category.Type)
+                                        {
+                                            case TransactionTypeViewModel.Income:
+                                                <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                                break;
+                                            case TransactionTypeViewModel.Expenditure:
+                                                <span class="glyphicon glyphicon-arrow-down text-danger"></span>
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    @String.Format("{0} ({1})", categoryLabel, transactionForecastHitsByCategory.Count())
+                                </td>
+                                <td class="text-right">@Html.DisplayFor(m => categoryTotal, "NullableCurrency")</td>
+                                <td class="hidden-xs"></td>
+                            </tr>
+
+                            foreach (var transactionForecastHit in transactionForecastHitsByCategory.OrderBy(m => m.Date).ThenBy(m => m.Forecast.Organization.Label))
+                            {
+                                var transactionForecast = transactionForecastHit.Forecast;
+                                var transactionForecastOrganization = transactionForecast.Organization;
+                                var autoReschedule = transactionForecast.AutoReschedule;
+                                var toggle = autoReschedule ? "disable" : "enable";
+
+                                var transactionForecastHitStatus = String.Empty;
+                                if (transactionForecastHit.TransactionId.HasValue)
+                                {
+                                    transactionForecastHitStatus = (transactionForecastHit.Transaction.Date <= transactionForecastHit.Date) ? "success" : "warning";
+                                }
+                                else if (DateTime.Today >= transactionForecastHit.Date)
+                                {
+                                    transactionForecastHitStatus = "danger";
+                                }
+
+                                <tr class="collapse @transactionForecastHitStatus" data-parent="@categorySelector">
+                                    <td></td>
+                                    <td style="padding-left: 20px">@String.Format("[{0}] {1}", transactionForecastHit.Date.ToString("d"), transactionForecastOrganization.Label)</td>
+                                    <td class="text-right">@Html.DisplayFor(m => transactionForecast.AutomationElement.Amount, "NullableCurrency")</td>
+                                    <td class="hidden-xs">
+                                        <a href="#" class="invisible" data-action="toggle-auto-reschedule" data-forecast-id="@transactionForecast.Id" data-toggle="@toggle">
+                                            @if (autoReschedule)
+                                            {
+                                                <span class="glyphicon glyphicon-stop"></span>@Resource.Actions_DisableAutoReschedule
+                                            }
+                                            else
+                                            {
+                                                <span class="glyphicon glyphicon-play"></span>@Resource.Actions_EnableAutoReschedule
+                                            }
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                        <tr class="table-total">
+                            <td></td>
+                            <td class="text-right">@type.DisplayName()</td>
+                            <td class="text-right">@Html.DisplayFor(m => typeTotal, "NullableCurrency")</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                }
+
+                <tfoot>
+                    <tr class="table-total">
+                        <td></td>
+                        <td class="text-right"><strong>@Resource.Labels_Total</strong></td>
+                        <td class="text-right">@Html.DisplayFor(m => total, "Currency")</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="forecastHitDialog" title="@Resource.Titles_HitEdition"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Consultation.Accounts.TransactionForecastHitsOfMonthPartial.Crud.init({
+                container: '#forecastHitDialog',
+                createUrl: '@Url.Action("CreateForecastHitFromTransactionId", "Planning", new { area = "Configuration" })',
+                toggleForecastAutoRescheduleUrl: '@Url.Action("ToggleForecastAutoReschedule", "Planning", new { area = "Configuration" })',
+            });
+
+            $('#accountsTransactionForecastHitsOfMonthPartialContent .table').on('click', '[data-action="toggle-auto-reschedule"]', function(e) {
+                var link = $(this);
+                var id = link.data('forecast-id');
+                var toggle = (link.data('toggle') == 'enable') ? true : false;
+
+                NBlackout.MoneyManager.Consultation.Accounts.TransactionForecastHitsOfMonthPartial.Crud.toggleForecastAutoReschedule({
+                    data: {
+                        id: id,
+                        toggle: toggle
+                    },
+                    success: function() {
+                        noty({
+                            text: '@Resource.Messages_ModificationDone'
+                        });
+
+                        $(document).trigger('forecast-hits-updated');
+                    }
+                });
+
+                e.preventDefault();
+            });
+        });
+    </script>
+</div>

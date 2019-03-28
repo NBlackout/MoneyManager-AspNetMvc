@@ -1,0 +1,38 @@
+﻿@model SearchTransactionsViewModel
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Transactions/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Transactions/Index/Bundle")
+
+<h3>@Resource.Labels_SearchCriterias</h3>
+@using (Html.BeginForm("ListPartial", "Transactions", FormMethod.Get, new { id = "searchTransactionsForm", @class = "form-inline" }))
+{
+    <div class="form-group @((!ViewData.ModelState.IsValidField("AccountId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.AccountId, new { @class = "control-label" })
+        @Html.DropDownListFor(m => m.AccountId, new SelectList(Model.Accounts.OrderBy(m => m.Category == null).ThenBy(m => (m.Category != null) ? m.Category.TypeDisplayName : String.Empty).ThenBy(m => m.Title).Select(t => new SelectListItem { Value = t.Id.ToString(), Text = ((t.Category != null) ? t.Category.Label + " - " : String.Empty) + t.Title, Group = new SelectListGroup { Name = (t.Category != null) ? t.Category.Type.DisplayName() : String.Empty } }), "Value", "Text", "Group.Name", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AccountId, null, new { @class = "help-block" })
+    </div>
+    <div class="form-group @((!ViewData.ModelState.IsValidField("OrganizationId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.OrganizationId, new { @class = "control-label" })
+        @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.Organizations.OrderBy(m => m.Category == null).ThenBy(m => (m.Category != null) ? m.Category.Label : String.Empty).ThenBy(m => m.Label), "Id", "Label", "Category.Label", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.OrganizationId, null, new { @class = "help-block" })
+    </div>
+    <div class="form-group @((!ViewData.ModelState.IsValidField("Label")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.Label, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Label, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Label, null, new { @class = "help-block" })
+    </div>
+
+    <button class="btn btn-default">Rechercher</button>
+    <div class="has-error">
+        @Html.ValidationMessage("ValidationError", new { @class = "help-block" })
+    </div>
+}
+<div id="transactionsListPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Consultation.Transactions.Index.init({
+            container: '#transactionsListPartialContainer'
+        });
+
+        handleTransactionsIndexEvents();
+    });
+</script>

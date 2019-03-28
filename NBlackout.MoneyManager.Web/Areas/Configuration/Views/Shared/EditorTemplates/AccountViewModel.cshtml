@@ -1,0 +1,41 @@
+﻿@model AccountViewModel
+
+@Html.HiddenFor(m => m.TechnicalId)
+@Html.HiddenFor(m => m.Balance)
+@Html.HiddenFor(m => m.LastSync)
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("Number")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Number, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Number, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.CategoryId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Label", "TypeDisplayName", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.CustomerId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.DropDownListFor(m => m.CustomerId, new SelectList(Model.Customers, "Id", "FullName"), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CustomerId, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("Title")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Title, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+        <label class="checkbox-inline">
+            @Html.CheckBoxFor(m => m.Enabled)@Html.DisplayNameFor(m => m.Enabled)
+        </label>
+    </div>
+</div>

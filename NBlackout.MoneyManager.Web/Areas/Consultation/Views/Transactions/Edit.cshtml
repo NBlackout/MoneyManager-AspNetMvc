@@ -1,0 +1,32 @@
+﻿@model TransactionViewModel
+
+@using (Html.BeginForm("Save", "Transactions", FormMethod.Post, new { id = "editTransactionForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#editTransactionForm').submit(function() {
+            NBlackout.MoneyManager.Consultation.Transactions.List.save({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_ModificationDone'
+                    });
+
+                    $(document).trigger('transactions-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

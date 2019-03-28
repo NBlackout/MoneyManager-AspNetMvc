@@ -1,0 +1,29 @@
+﻿@model VerifyPhoneNumberViewModel
+
+@using (Html.BeginForm("VerifyPhoneNumber", "User", FormMethod.Post, new { id = "verifyPhoneNumberForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#verifyPhoneNumberForm').submit(function() {
+            NBlackout.MoneyManager.Security.User.PhoneNumber.verify({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_ModificationDone'
+                    });
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

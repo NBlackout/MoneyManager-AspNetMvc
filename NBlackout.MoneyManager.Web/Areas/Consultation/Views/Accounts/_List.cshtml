@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AccountViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Accounts/ListPartial/Bundle")
+
+<div id="accountsListPartialContent">
+    @if (Model.Any())
+    {
+        <div class="row">
+            <div id="accountSelection" class="clearfix col-sm-4 col-md-3">
+                <ul id="accountPills" class="nav nav-pills nav-stacked pull-right">
+                    @foreach (var accountsByType in Model.OrderBy(m => m.Category == null).ThenBy(m => (m.Category != null) ? m.Category.TypeDisplayName : String.Empty).GroupBy(m => (m.Category != null) ? (AccountTypeViewModel?)(m.Category.Type) : null))
+                    {
+                        <li class="accounts-type"><h3><small>@((accountsByType.Key.HasValue) ? accountsByType.Key.DisplayName() : Resource.Labels_Others)</small></h3></li>
+                        foreach (var account in accountsByType)
+                        {
+                            <li>
+                                <a href="@Url.Action("ActivityPartial", new { id = account.Id })" data-action="activity" data-id="@account.Id" class="clearfix">
+                                    <div class="account-selection-header clearfix">
+                                        <strong class="pull-left">@account.Title</strong>
+                                        <strong class="glyphicon glyphicon-menu-right pull-right"></strong>
+                                    </div>
+                                    <span class="pull-left">@account.Number</span>
+                                    <span class="pull-right">@Html.DisplayFor(m => account.Balance, "Currency")</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div id="accountsActivityPartialContainer" class="col-sm-8 col-md-9">
+                <div class="alert alert-warning">
+                    <span>Veuillez sélectionner un compte</span>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_MoveAlong</span>
+            <a href="@Url.Action("Index", "DataManagement", new { area = "Administration" })" class="alert-link">@Resource.Labels_Import</a>
+        </div>
+    }
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Consultation.Accounts.ListPartial.Activity.init({
+                container: '#accountsActivityPartialContainer'
+            });
+
+            handleAccountsListPartialEvents();
+        });
+    </script>
+</div>

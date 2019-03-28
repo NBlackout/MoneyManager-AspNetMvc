@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A85342A6-D1F1-4BA6-820F-5FD42613B80A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NBlackout.MoneyManager.ViewModels</RootNamespace>
+    <AssemblyName>NBlackout.MoneyManager.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountTypeViewModel.cs" />
+    <Compile Include="AccountCategoryViewModel.cs" />
+    <Compile Include="AccountViewModel.cs" />
+    <Compile Include="AuthenticationViewModel.cs" />
+    <Compile Include="AutomationElementTagViewModel.cs" />
+    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="CustomerViewModel.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="ImportHistoryViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReassignAccountCategoryViewModel.cs" />
+    <Compile Include="ReassignAccountCustomerViewModel.cs" />
+    <Compile Include="ReassignOrganizationViewModel.cs" />
+    <Compile Include="ReassignOrganizationCategoryViewModel.cs" />
+    <Compile Include="Results\ReconciliationSuggestionResultViewModel.cs" />
+    <Compile Include="Results\SuggestionResultViewModel.cs" />
+    <Compile Include="SearchTransactionsViewModel.cs" />
+    <Compile Include="SelectTokenProviderViewModel.cs" />
+    <Compile Include="SendCodeViewModel.cs" />
+    <Compile Include="TransactionTypeViewModel.cs" />
+    <Compile Include="TransactionForecastHitViewModel.cs" />
+    <Compile Include="TransactionForecastViewModel.cs" />
+    <Compile Include="AutomationElementViewModel.cs" />
+    <Compile Include="OrganizationViewModel.cs" />
+    <Compile Include="OrganizationCategoryViewModel.cs" />
+    <Compile Include="TransactionViewModel.cs" />
+    <Compile Include="UpdateEmailViewModel.cs" />
+    <Compile Include="UpdatePasswordViewModel.cs" />
+    <Compile Include="UpdatePhoneNumberViewModel.cs" />
+    <Compile Include="UpdateTransactionForecastHitTransactionViewModel.cs" />
+    <Compile Include="UpdateTransactionOrganizationViewModel.cs" />
+    <Compile Include="UserCustomerViewModel.cs" />
+    <Compile Include="UserViewModel.cs" />
+    <Compile Include="VerifyEmailViewModel.cs" />
+    <Compile Include="VerifyPhoneNumberViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Resources\NBlackout.MoneyManager.Resources.csproj">
+      <Project>{90026C71-51C1-4987-83A6-FCE52944D8BA}</Project>
+      <Name>NBlackout.MoneyManager.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

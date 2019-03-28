@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ImportHistoryViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/DataManagement/ImportHistoriesPartial/Bundle")
+
+<div id="dataManagementImportHistoriesPartialContent">
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FileName)</th>
+                        <th>@Resource.Labels_Date</th>
+                        <th>@Html.DisplayNameFor(m => m.Duration)</th>
+                        <th>@Html.DisplayNameFor(m => m.UserName)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var importHistory in Model.OrderByDescending(m => m.BeginDate))
+                    {
+                        <tr>
+                            <td>@importHistory.FileName</td>
+                            <td>@importHistory.BeginDate.ToString("G")</td>
+                            <td>@importHistory.Duration</td>
+                            <td>@importHistory.UserName</td>
+                            <td>
+                                <a href="#" class="invisible" data-action="transactions" data-id="@importHistory.Id"><span class="glyphicon glyphicon-list-alt"></span>@Resource.Labels_Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="transactionsDialog" title="@Resource.Labels_Transactions"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Configuration.DataManagement.ImportHistoriesPartial.Transactions.init({
+                container: '#transactionsDialog',
+                url: '@Url.Action("TransactionsOfImportHistory", "Transactions", new { area =  "Consultation" })'
+            });
+
+            handleImportHistoriesPartialEvents();
+        });
+    </script>
+</div>

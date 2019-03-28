@@ -1,0 +1,33 @@
+﻿@model ReassignOrganizationViewModel
+
+<p>@Html.Raw(Resource.Messages_DeleteOrganization)</p>
+@using (Html.BeginForm("ConfirmDeleteOrganization", "Organizations", FormMethod.Post, new { id = "confirmDeleteOrganizationForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.SourceOrganizationId)
+
+    <div class="form-group @((!ViewData.ModelState.IsValidField("TargetOrganizationId")) ? "has-error" : "")">
+        @Html.LabelFor(m => m.TargetOrganizationId, Resource.Messages_ChooseNewOrganization)
+        @Html.DropDownListFor(m => m.TargetOrganizationId, new SelectList(Model.Organizations.OrderBy(t => t.Category.Label).ThenBy(t => t.Label), "Id", "Label", "Category.Label", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TargetOrganizationId, null, new { @class = "help-block" })
+    </div>
+    <button class="btn btn-default">@Resource.Actions_Delete</button>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#confirmDeleteOrganizationForm').submit(function() {
+            NBlackout.MoneyManager.Configuration.Organizations.ListPartial.Organizations.confirmDeletion({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_DeletionDone'
+                    });
+
+                    $(document).trigger('organizations-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

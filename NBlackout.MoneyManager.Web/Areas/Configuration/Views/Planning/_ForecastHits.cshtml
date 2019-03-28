@@ -1,0 +1,119 @@
+﻿@model IEnumerable<TransactionForecastViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Planning/ForecastHitsPartial/Bundle")
+
+<div id="forecastHitsContent">
+    <div class="actions">
+        <button class="btn btn-default" data-action="create" data-target="forecast">@Resource.Labels_NewForecast</button>
+        <button disabled="disabled" class="btn btn-default" data-action="create" data-target="hit">@Resource.Labels_NewHit</button>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().AccountId)</th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().OrganizationId)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().AutomationElement.Amount)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().AutomationElement.Tolerance)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var transactionForecast in Model.OrderBy(m => m.Account.Category).ThenBy(m => m.Account.Title).ThenBy(m => m.Organization.Category.Type.DisplayName()).ThenBy(m => m.Organization.Category.Label).ThenBy(m => m.Organization.Label))
+                    {
+                        var transactionForecastId = transactionForecast.Id;
+                        var transactionForecastOrganization = transactionForecast.Organization;
+                        var transactionForecastOrganizationLabel = transactionForecastOrganization.Label;
+                        var transactionForecastOrganizationCategory = transactionForecastOrganization.Category;
+                        var transactionForecastOrganizationCategoryLabel = transactionForecastOrganizationCategory.Label;
+                        var transactionForecastAutomationElement = transactionForecast.AutomationElement;
+                        var transactionForecastSelector = "[data-parent=\"" + transactionForecastId + "\"]";
+                        var transactionForecastHits = transactionForecast.Hits.Where(t => t.TransactionId == null);
+
+                        <tr data-target="@transactionForecastSelector" data-toggle="collapse">
+                            <td>
+                                @if (transactionForecastHits.Any())
+                                {
+                                <span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span>
+                                }
+                            </td>
+                            <td>@transactionForecast.Account.Title</td>
+                            <td>
+                                @switch (transactionForecastOrganizationCategory.Type)
+                                {
+                                    case TransactionTypeViewModel.Income:
+                                        <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                        break;
+                                    case TransactionTypeViewModel.Expenditure:
+                                        <span class="glyphicon glyphicon-arrow-down text-danger"></span>
+                                        break;
+                                    default:
+                                        <span class="glyphicon glyphicon-arrow-down text-transparent"></span>
+                                        break;
+                                }
+
+                                @String.Format((transactionForecastHits.Any() ? "{0}/{1} ({2})" : "{0}/{1}"), transactionForecastOrganizationCategoryLabel, transactionForecastOrganizationLabel, transactionForecastHits.Count())
+                            </td>
+                            <td class="text-right">@Html.DisplayFor(m => transactionForecastAutomationElement.Amount, "NullableCurrency")</td>
+                            <td>@Html.DisplayFor(m => transactionForecastAutomationElement.Tolerance, "NullableAmount")</td>
+                            <td>
+                                <a href="#" class="invisible" data-action="edit" data-target="forecast" data-id="@transactionForecastId"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                <a href="#" class="invisible" data-action="delete" data-target="forecast" data-id="@transactionForecastId"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                            </td>
+                        </tr>
+                        
+                        foreach (var transactionForecastHit in transactionForecastHits.OrderBy(m => m.Date))
+                        {
+                            var transactionForecastHitId = transactionForecastHit.Id;
+
+                            <tr class="collapse" data-parent="@transactionForecastId">
+                                <td class="collapser"></td>
+                                <td colspan="4">@String.Format("[{0}]", transactionForecastHit.Date.ToString("d"))</td>
+                                <td>
+                                    <a href="#" class="invisible" data-action="edit" data-target="forecast-hit" data-id="@transactionForecastHitId"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                    <a href="#" class="invisible" data-action="delete" data-target="forecast-hit" data-id="@transactionForecastHitId"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="forecastDialog" title="@Resource.Titles_ForecastEdition"></div>
+    <div id="deleteForecastDialog" title="@Resource.Titles_ForecastDeletion"></div>
+    <div id="forecastHitDialog" title="@Resource.Titles_HitEdition"></div>
+    <div id="deleteForecastHitDialog" title="@Resource.Titles_HitDeletion"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Configuration.Planning.ForecastHitsPartial.Forecasts.init({
+                container: '#forecastDialog',
+                createUrl: '@Url.Action("CreateForecast")',
+                editUrl: '@Url.Action("EditForecast")',
+                deleteContainer: '#deleteForecastDialog',
+                deleteUrl: '@Url.Action("DeleteForecast")'
+            });
+
+            NBlackout.MoneyManager.Configuration.Planning.ForecastHitsPartial.ForecastHits.init({
+                container: '#forecastHitDialog',
+                createUrl: '@Url.Action("CreateForecastHit")',
+                editUrl: '@Url.Action("EditForecastHit")',
+                deleteContainer: '#deleteForecastHitDialog',
+                deleteUrl: '@Url.Action("DeleteForecastHit")'
+            });
+
+            handlePlanningForecastHitsPartialEvents();
+        });
+    </script>
+</div>

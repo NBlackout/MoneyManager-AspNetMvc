@@ -1,0 +1,28 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Dashboard/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Dashboard/Index/Bundle")
+
+<div class="row">
+    <div id="accountsChart" class="col-lg-8 col-lg-offset-2"></div>
+</div>
+<div class="row">
+    <div id="expenditureChart" class="col-lg-8 col-lg-offset-2"></div>
+</div>
+<div class="row">
+    <div id="transactionsOfOrganizationChart" class="col-lg-12"></div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Consultation.Dashboard.Index.init({
+            accountsUrl: '@Url.Action("Accounts")',
+            expenditureUrl: '@Url.Action("Expenditure")',
+            transactionsOfOrganizationUrl: '@Url.Action("TransactionsOfOrganization")'
+        });
+
+        NBlackout.Core.ajax({
+            url: NBlackout.MoneyManager.Consultation.Dashboard.Index.accountsUrl,
+            success: function(accounts) {
+                buildAccountsChart(accounts);
+            }
+        });
+    });
+</script>

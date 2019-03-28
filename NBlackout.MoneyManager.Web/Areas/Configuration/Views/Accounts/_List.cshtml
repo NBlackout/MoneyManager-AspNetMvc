@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AccountViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Accounts/ListPartial/Bundle")
+
+<div id="accountsListPartialContent">
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+               <thead>
+                <tr>
+                    <th></th>
+                    <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().Title)</th>
+                    <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Number)</th>
+                    <th>@Html.DisplayNameFor(m => m.FirstOrDefault().CustomerId)</th>
+                    <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Enabled)</th>
+                    <th>@Resource.Labels_Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var accountsByType in Model.OrderBy(m => m.Category == null).ThenBy(m => (m.Category != null) ? m.Category.TypeDisplayName : String.Empty).ThenBy(m => m.Title).GroupBy(m => (m.Category != null) ? (AccountTypeViewModel?)(m.Category.Type) : null))
+                {
+                    var key = accountsByType.Key;
+                    var type = (key.HasValue) ? (int)key.Value : 0;
+                    var totalBalance = accountsByType.Sum(m => m.Balance);
+                    var typeOrganization = "[data-parent=\"" + type + "\"]";
+
+                    <tr data-target="@typeOrganization" data-toggle="collapse">
+                        <td>
+                            <span class="glyphicon glyphicon-chevron-down" data-icon="collapse"></span>
+                        </td>
+                        <td>@((key.HasValue) ? key.Value.DisplayName() : Resource.Labels_Others)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    foreach (var account in accountsByType)
+                    {
+                        <tr class="collapse in" data-parent="@type">
+                            <td></td>
+                            <td>@((account.Category != null) ? account.Category.Label + " - " : String.Empty)<i>@account.Title</i></td>
+                            <td>@account.Number</td>
+                            <td>@((account.Customer != null) ? account.Customer.FullName : String.Empty)</td>
+                            <td>@(account.Enabled ? Resource.Labels_Yes : Resource.Labels_No)</td>
+                            <td>
+                                <a href="#" class="invisible" data-action="edit" data-id="@account.Id"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_MoveAlong</span>
+            <a href="@Url.Action("Index", "DataManagement", new { area = "Administration" })" class="alert-link">@Resource.Labels_Import</a>
+        </div>
+    }
+    
+    <div id="accountDialog" title="@Resource.Titles_AccountEdition"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Configuration.Accounts.ListPartial.Crud.init({
+                container: '#accountDialog',
+                editUrl: '@Url.Action("Edit")'
+            });
+
+            handleAccountsListPartialEvents();
+        });
+    </script>
+</div>

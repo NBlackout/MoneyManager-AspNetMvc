@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion />
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F2EB5E87-1001-407D-AA67-E0DAFD42F613}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NBlackout.MoneyManager.Web</RootNamespace>
+    <AssemblyName>NBlackout.MoneyManager.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44302</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ODataConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.OAuth.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Configuration\Controllers\AccountsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\OrganizationsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\SuggestionsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\OrganizationCategoriesController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\DataManagementController.cs" />
+    <Compile Include="Areas\Administration\Controllers\AccountCategoriesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\PlanningController.cs" />
+    <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
+    <Compile Include="Areas\Consultation\ConsultationAreaRegistration.cs" />
+    <Compile Include="Areas\Consultation\Controllers\AccountsController.cs" />
+    <Compile Include="Areas\Consultation\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Consultation\Controllers\TransactionsController.cs" />
+    <Compile Include="Areas\Security\Controllers\AuthenticationController.cs" />
+    <Compile Include="Areas\Security\Controllers\UserController.cs" />
+    <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\OData\AccountsController.cs" />
+    <Compile Include="Controllers\OData\AccountCategoriesController.cs" />
+    <Compile Include="Controllers\OData\CustomersController.cs" />
+    <Compile Include="Controllers\OData\DataManagementController.cs" />
+    <Compile Include="Controllers\OData\ImportHistoriesController.cs" />
+    <Compile Include="Controllers\OData\TransactionForecastHitsController.cs" />
+    <Compile Include="Controllers\OData\TransactionForecastsController.cs" />
+    <Compile Include="Controllers\OData\AutomationElementsController.cs" />
+    <Compile Include="Controllers\OData\OrganizationsController.cs" />
+    <Compile Include="Controllers\OData\TransactionsController.cs" />
+    <Compile Include="Controllers\OData\OrganizationCategoriesController.cs" />
+    <Compile Include="Controllers\OData\UserCustomersController.cs" />
+    <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\ODataDaoExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Configuration\Views\Shared\EditorTemplates\TransactionForecastViewModel.cshtml" />
+    <Content Include="Areas\Consultation\Views\Accounts\List.cshtml" />
+    <Content Include="Areas\Consultation\Views\Accounts\_TransactionForecastHitsOfMonth.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\EditorTemplates\TransactionForecastHitViewModel.cshtml" />
+    <Content Include="Areas\Configuration\Views\DataManagement\ImportHistories.cshtml" />
+    <Content Include="Areas\Administration\Views\AccountCategories\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Customers\List.cshtml" />
+    <Content Include="Areas\Administration\Views\AccountCategories\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\AccountCategories\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\AccountCategories\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\AccountCategoryViewModel.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\CustomerViewModel.cshtml" />
+    <Content Include="Areas\Consultation\Views\Accounts\_List.cshtml" />
+    <Content Include="Areas\Administration\Views\OrganizationCategories\_List.cshtml" />
+    <Content Include="Areas\Configuration\Views\Suggestions\_Suggestions.cshtml" />
+    <Content Include="Areas\Administration\Views\Customers\_List.cshtml" />
+    <Content Include="Areas\Administration\Views\AccountCategories\_List.cshtml" />
+    <Content Include="Areas\Configuration\Views\DataManagement\_ImportHistories.cshtml" />
+    <Content Include="Areas\Consultation\Views\Accounts\Details.cshtml" />
+    <Content Include="Areas\Consultation\Views\Shared\DisplayTemplates\AccountViewModel.cshtml" />
+    <Content Include="Areas\Configuration\Views\Web.config" />
+    <Content Include="Areas\Configuration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\AccountCategories\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\_ForecastHits.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\_Suggestions.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\CreateForecast.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\CreateForecastHit.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\CreateForecastHitFromTransactionId.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\DeleteForecast.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\DeleteForecastHit.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\EditForecast.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\EditForecastHit.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\ForecastHits.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Planning\Suggestions.cshtml" />
+    <Content Include="Areas\Configuration\Views\Accounts\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Accounts\List.cshtml" />
+    <Content Include="Areas\Configuration\Views\Accounts\_List.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\EditorTemplates\AutomationElementViewModel.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\CreateAutomationElement.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\DeleteAutomationElement.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\EditAutomationElement.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\OrganizationCategoryViewModel.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\List.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\_List.cshtml" />
+    <None Include="Properties\PublishProfiles\NBlackout.pubxml" />
+    <Content Include="Content\Styles\tagify\tagify.css" />
+    <Content Include="Scripts\highcharts\highcharts.js.map" />
+    <None Include="Scripts\jquery\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\highcharts\highcharts.js" />
+    <Content Include="Scripts\jquery\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery\jquery-3.3.1.min.map" />
+    <Content Include="Content\Styles\nblackout\images\loader.gif" />
+    <Content Include="Content\Styles\nblackout\nblackout.css" />
+    <Content Include="Scripts\nblackout\money-manager\administration\accountCategories\accountCategories.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\accountCategories\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\accountCategories\listPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\accounts\accounts.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\accounts\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\accounts\list.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\accounts\listPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\organizations\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\organizations\list.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\organizations\listPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\organizations\organizations.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\planning\forecastHits.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\planning\forecastHitsPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\planning\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\planning\planning.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\planning\suggestions.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\planning\suggestionsPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\suggestions\suggestionsPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\organizationCategories\listPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\customers\customers.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\customers\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\customers\listPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\configuration.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\dataManagement\importHistoriesPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\dataManagement\importHistories.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\dataManagement\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\customers\list.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\accountCategories\list.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\accounts\listPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\accounts\transactionForecastHitsOfMonthPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\transactions\list.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\nblackout\nblackout.core.js" />
+    <Content Include="Scripts\nblackout\nblackout.js" />
+    <Content Include="Scripts\nblackout\nblackout.ui.js" />
+    <Content Include="Scripts\tagify\jQuery.tagify.min.js" />
+    <Content Include="Views\Shared\DisplayTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableCurrency.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Amount.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableAmount.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.DynamicFilters, Version=3.0.1.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.DynamicFilters.3.0.1\lib\net40\EntityFramework.DynamicFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.OData.Client, Version=6.19.0.11114, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Client.6.19.0\lib\net40\Microsoft.OData.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.Core, Version=6.19.0.11114, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Core.6.19.0\lib\portable-net45+win+wpa81\Microsoft.OData.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.Edm, Version=6.19.0.11114, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Edm.6.19.0\lib\portable-net45+win+wpa81\Microsoft.OData.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Spatial, Version=6.19.0.11114, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Spatial.6.19.0\lib\portable-net45+win+wpa81\Microsoft.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Communication.Mail.Smtp, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Communication.Mail.Smtp.1.2.0\lib\net461\NBlackout.Framework.Communication.Mail.Smtp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Identity, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Identity.1.4.1\lib\net461\NBlackout.Framework.Identity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Identity.EntityFramework, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Identity.EntityFramework.1.4.0\lib\net461\NBlackout.Framework.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Identity.EntityFramework.Owin, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Identity.EntityFramework.Owin.1.1.0\lib\net461\NBlackout.Framework.Identity.EntityFramework.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Web, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Web.1.8.0\lib\net461\NBlackout.Framework.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Web.Mvc, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Web.Mvc.1.5.2\lib\net461\NBlackout.Framework.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Web.OData, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Web.OData.1.5.2\lib\net461\NBlackout.Framework.Web.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="NBlackout.Framework.Web.OData.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBlackout.Framework.Web.OData.Client.1.0.0\lib\net461\NBlackout.Framework.Web.OData.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.Web.4.8.0\lib\net35\NLog.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.7\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.OData, Version=5.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.OData.5.9.0\lib\net45\System.Web.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Bll.Account\NBlackout.MoneyManager.Bll.Account.csproj">
+      <Project>{D8BDDBE7-170E-4B24-A642-E7BC23F862B6}</Project>
+      <Name>NBlackout.MoneyManager.Bll.Account</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Bll.DataManagement\NBlackout.MoneyManager.Bll.DataManagement.csproj">
+      <Project>{67E98D4B-7E59-4851-997C-A1110A3E5F9B}</Project>
+      <Name>NBlackout.MoneyManager.Bll.DataManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Bll.TransactionForecastHit\NBlackout.MoneyManager.Bll.TransactionForecastHit.csproj">
+      <Project>{2A6B9769-B548-47E8-8CD6-40A6B28566F7}</Project>
+      <Name>NBlackout.MoneyManager.Bll.TransactionForecastHit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Bll.Transaction\NBlackout.MoneyManager.Bll.Transaction.csproj">
+      <Project>{73A843DC-8A3D-4947-A0D1-E652C2FAF64F}</Project>
+      <Name>NBlackout.MoneyManager.Bll.Transaction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Dal.AccountCategory\NBlackout.MoneyManager.Dal.AccountCategory.csproj">
+      <Project>{C6BE8571-98CF-4158-AE80-5733E5F56EEB}</Project>
+      <Name>NBlackout.MoneyManager.Dal.AccountCategory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Dal.Account\NBlackout.MoneyManager.Dal.Account.csproj">
+      <Project>{D3E865A3-3FB8-43F1-B059-9B6F6F12F803}</Project>
+      <Name>NBlackout.MoneyManager.Dal.Account</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Dal.Common\NBlackout.MoneyManager.Dal.Common.csproj">
+      <Project>{9A778E3A-3705-4D31-AD68-94B44A16947C}</Project>
+      <Name>NBlackout.MoneyManager.Dal.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Dal.Customer\NBlackout.MoneyManager.Dal.Customer.csproj">
+      <Project>{FF5645BD-9A26-49CA-AF71-6CCD960B16B4}</Project>
+      <Name>NBlackout.MoneyManager.Dal.Customer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Dal.OrganizationCategory\NBlackout.MoneyManager.Dal.OrganizationCategory.csproj">
+      <Project>{5688DD0C-E0D0-4197-B1B5-C776AEF7C1FB}</Project>
+      <Name>NBlackout.MoneyManager.Dal.OrganizationCategory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Dal.Organization\NBlackout.MoneyManager.Dal.Organization.csproj">
+      <Project>{271fdad2-3585-4033-928e-f7a1ad5a2af7}</Project>
+      <Name>NBlackout.MoneyManager.Dal.Organization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Entity\NBlackout.MoneyManager.Entity.csproj">
+      <Project>{F4E0E106-C563-4A7C-BB6C-286A9E62CAEF}</Project>
+      <Name>NBlackout.MoneyManager.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Models\NBlackout.MoneyManager.Models.csproj">
+      <Project>{5f745a5d-0380-496c-994d-63c466e281b1}</Project>
+      <Name>NBlackout.MoneyManager.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.Resources\NBlackout.MoneyManager.Resources.csproj">
+      <Project>{90026C71-51C1-4987-83A6-FCE52944D8BA}</Project>
+      <Name>NBlackout.MoneyManager.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NBlackout.MoneyManager.ViewModels\NBlackout.MoneyManager.ViewModels.csproj">
+      <Project>{A85342A6-D1F1-4BA6-820F-5FD42613B80A}</Project>
+      <Name>NBlackout.MoneyManager.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Configuration\Views\Organizations\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\OrganizationCategories\Create.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\OrganizationCategories\Delete.cshtml" />
+    <Content Include="Areas\Configuration\Views\Organizations\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\OrganizationCategories\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\OrganizationCategories\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\OrganizationCategories\List.cshtml" />
+    <Content Include="Areas\Configuration\Views\DataManagement\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Suggestions\Suggestions.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\EditorTemplates\OrganizationViewModel.cshtml" />
+    <Content Include="Areas\Administration\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Consultation\Views\Accounts\_Activity.cshtml" />
+    <Content Include="Areas\Configuration\Views\Accounts\Edit.cshtml" />
+    <Content Include="Areas\Consultation\Views\Accounts\Index.cshtml" />
+    <Content Include="Areas\Consultation\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\EditorTemplates\AccountViewModel.cshtml" />
+    <Content Include="Areas\Consultation\Views\Shared\EditorTemplates\TransactionViewModel.cshtml" />
+    <Content Include="Areas\Consultation\Views\Transactions\Edit.cshtml" />
+    <Content Include="Areas\Consultation\Views\Transactions\Index.cshtml" />
+    <Content Include="Areas\Consultation\Views\Transactions\_List.cshtml" />
+    <Content Include="Areas\Consultation\Views\Web.config" />
+    <Content Include="Areas\Consultation\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Security\Views\Authentication\SelectTokenProvider.cshtml" />
+    <Content Include="Areas\Security\Views\Authentication\SendCode.cshtml" />
+    <Content Include="Areas\Security\Views\Authentication\SignIn.cshtml" />
+    <Content Include="Areas\Security\Views\Shared\EditorTemplates\UpdateEmailViewModel.cshtml" />
+    <Content Include="Areas\Security\Views\Shared\EditorTemplates\UpdatePasswordViewModel.cshtml" />
+    <Content Include="Areas\Security\Views\Shared\EditorTemplates\UpdatePhoneNumberViewModel.cshtml" />
+    <Content Include="Areas\Security\Views\Shared\EditorTemplates\VerifyEmailViewModel.cshtml" />
+    <Content Include="Areas\Security\Views\Shared\EditorTemplates\VerifyPhoneNumberViewModel.cshtml" />
+    <Content Include="Areas\Security\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Security\Views\User\EditEmail.cshtml" />
+    <Content Include="Areas\Security\Views\User\EditPassword.cshtml" />
+    <Content Include="Areas\Security\Views\User\EditPhoneNumber.cshtml" />
+    <Content Include="Areas\Security\Views\User\ManageAccount.cshtml" />
+    <Content Include="Areas\Security\Views\User\VerifyEmail.cshtml" />
+    <Content Include="Areas\Security\Views\User\VerifyPhoneNumber.cshtml" />
+    <Content Include="Areas\Security\Views\Web.config" />
+    <Content Include="Areas\Security\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Styles\bootstrap\bootstrap.css" />
+    <Content Include="Content\Styles\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\Styles\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\Styles\bootstrap\bootstrap.min.css.map" />
+    <Content Include="Content\Styles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Styles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Styles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Styles\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Styles\jquery-ui\jquery-ui.css" />
+    <Content Include="Content\Styles\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Content\Styles\nblackout\money-manager\images\background.png" />
+    <Content Include="Content\Styles\nblackout\money-manager\images\icon.png" />
+    <Content Include="Content\Styles\nblackout\money-manager\money-manager.css" />
+    <Content Include="NLog.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\npm.js" />
+    <Content Include="Scripts\jquery-noty\jquery-noty-2.3.6.js" />
+    <Content Include="Scripts\jquery-noty\jquery-noty-2.3.6.min.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui-datepicker-fr.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\administration.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\organizationCategories\organizationCategories.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\organizationCategories\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\administration\organizationCategories\list.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\dataManagement\dataManagement.js" />
+    <Content Include="Scripts\nblackout\money-manager\configuration\suggestions\suggestions.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\accounts\accounts.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\accounts\list.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\accounts\activityPartial.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\accounts\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\consultation.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\dashboard\dashboard.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\dashboard\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\transactions\index.js" />
+    <Content Include="Scripts\nblackout\money-manager\consultation\transactions\transactions.js" />
+    <Content Include="Scripts\nblackout\money-manager\money-manager.js" />
+    <Content Include="Scripts\nblackout\money-manager\security\security.js" />
+    <Content Include="Scripts\nblackout\money-manager\security\user\user.js" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>7979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:7979/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+</Project>

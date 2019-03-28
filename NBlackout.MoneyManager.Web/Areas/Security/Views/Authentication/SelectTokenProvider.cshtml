@@ -1,0 +1,18 @@
+﻿@model SelectTokenProviderViewModel
+@{
+    Layout = "~/Areas/Security/Views/Shared/_Layout.cshtml";
+}
+<div id="authenticationContent">
+    <h3 id="authenticationTitle">@Resource.Labels_Provider</h3>
+    @using (Html.BeginForm("SendCode", "Authentication", FormMethod.Post))
+    {
+        <div class="form-group @((!ViewData.ModelState.IsValidField("TokenProvider")) ? "has-error" : "")">
+            @Html.LabelFor(m => m.TokenProvider, new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.TokenProvider, new SelectList(Model.TokenProviders), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TokenProvider, null, new { @class = "help-block" })
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn btn-block btn-primary">@Resource.Actions_Send</button>
+        </div>
+    }
+</div>

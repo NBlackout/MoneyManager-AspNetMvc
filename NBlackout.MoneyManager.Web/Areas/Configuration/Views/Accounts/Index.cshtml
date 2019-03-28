@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Accounts/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Accounts/Index/Bundle")
+
+<div id="accountsListContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.Accounts.Index.List.init({
+            container: '#accountsListContainer',
+            url: '@Url.Action("List")'
+        });
+
+        handleAccountsIndexEvents();
+    });
+</script>

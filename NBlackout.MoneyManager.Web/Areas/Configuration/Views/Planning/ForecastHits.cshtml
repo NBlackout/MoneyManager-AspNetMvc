@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Planning/ForecastHits/Bundle")
+
+<h3>@Resource.Labels_TransactionForecasts</h3>
+<div id="planningForecastHitsPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.Planning.ForecastHits.DataGrid.init({
+            container: '#planningForecastHitsPartialContainer',
+            url: '@Url.Action("ForecastHitsPartial")'
+        });
+
+        handlePlanningForecastHitsEvents();
+    });
+</script>

@@ -1,0 +1,39 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/DataManagement/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/DataManagement/Index/Bundle")
+
+<h3>@Resource.Labels_Import</h3>
+@using (Html.BeginForm("Import", "DataManagement", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm", @class = "form-inline" }))
+{
+    <input id="files" name="files" multiple="multiple" type="file" class="invisible" style="display: inline; width: 1px;">
+
+    <div class="form-group">
+        <label for="chosenFile">@Resource.Labels_File</label>
+        <div class="input-group">
+            <input id="chosenFile" type="text" class="form-control" readonly="readonly">
+            <span class="input-group-btn">
+                <button id="chooseFile" type="button" class="btn btn-default">@Resource.Actions_Choose</button>
+            </span>
+        </div>
+    </div>
+
+    <button id="importButton" class="btn btn-default" disabled="disabled">@Resource.Actions_Import</button>
+}
+<div id="importHistoriesContainer"></div>
+<div id="importSuccessContainer" class="hidden">
+    <div>
+        <span id="importSuccessCount"></span> <span>@Resource.Messages_TransactionInserted</span>
+    </div>
+    <div>
+        <a href="@Url.Action("Index", "Organizations")">@Resource.Actions_AffectOrganization</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.DataManagement.Index.ImportHistories.init({
+            container: '#importHistoriesContainer',
+            url: '@Url.Action("ImportHistories")'
+        });
+
+        handleDataManagementEvents();
+    });
+</script>

@@ -1,0 +1,16 @@
+﻿@model UpdatePhoneNumberViewModel
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("PhoneNumber")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("PhoneNumberConfirmation")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.PhoneNumberConfirmation, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.PhoneNumberConfirmation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PhoneNumberConfirmation, null, new { @class = "help-block" })
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿@model UpdatePhoneNumberViewModel
+
+@using (Html.BeginForm("SavePhoneNumber", "User", FormMethod.Post, new { id = "editPhoneNumberForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<div id="verifyPhoneNumberDialog"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Security.User.VerifyPhoneNumber.init({
+            container: '#verifyPhoneNumberDialog'
+        });
+
+        $('#editPhoneNumberForm').submit(function() {
+            NBlackout.MoneyManager.Security.User.PhoneNumber.save({
+                form: $(this),
+                success: function(response) {
+                    var content = $(response).find('#viewContainer').html();
+
+                    NBlackout.MoneyManager.Security.User.VerifyPhoneNumber.open(content);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

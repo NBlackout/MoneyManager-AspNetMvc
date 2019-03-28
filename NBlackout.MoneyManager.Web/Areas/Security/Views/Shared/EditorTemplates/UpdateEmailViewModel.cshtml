@@ -1,0 +1,16 @@
+﻿@model UpdateEmailViewModel
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("Email")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("EmailConfirmation")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.EmailConfirmation, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.EmailConfirmation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.EmailConfirmation, null, new { @class = "help-block" })
+    </div>
+</div>

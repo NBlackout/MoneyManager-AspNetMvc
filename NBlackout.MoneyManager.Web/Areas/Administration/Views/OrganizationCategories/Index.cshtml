@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/OrganizationCategories/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/OrganizationCategories/Index/Bundle")
+
+<div id="organizationCategoriesListContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Administration.OrganizationCategories.Index.List.init({
+            container: '#organizationCategoriesListContainer',
+            url: '@Url.Action("List")'
+        });
+
+        handleOrganizationCategoriesIndexEvents();
+    });
+</script>

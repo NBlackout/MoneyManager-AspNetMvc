@@ -1,0 +1,23 @@
+﻿@model TransactionForecastViewModel
+
+<div class="form-group @((!ViewData.ModelState.IsValidField("AccountId")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.AccountId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.DropDownListFor(m => m.AccountId, new SelectList(Model.Accounts.OrderBy(m => m.Title), "Id", "Title", "Category.TypeDisplayName", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AccountId, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group @((!ViewData.ModelState.IsValidField("OrganizationId")) ? "has-error" : "")">
+    @Html.LabelFor(m => m.OrganizationId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.Organizations.OrderBy(m => m.Category.Label).ThenBy(m => m.Label), "Id", "Label", "Category.Label", 0), String.Empty, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.OrganizationId, null, new { @class = "help-block" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+        <label class="checkbox-inline">
+            @Html.CheckBoxFor(m => m.AutoReschedule)@Html.DisplayNameFor(m => m.AutoReschedule)
+        </label>
+    </div>
+</div>

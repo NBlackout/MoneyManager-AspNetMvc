@@ -1,0 +1,32 @@
+﻿@model AutomationElementViewModel
+
+@using (Html.BeginForm("SaveAutomationElement", "Organizations", FormMethod.Post, new { id = "editAutomationElementForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#editAutomationElementForm').submit(function() {
+            NBlackout.MoneyManager.Configuration.Organizations.ListPartial.AutomationElements.save({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_ModificationDone'
+                    });
+
+                    $(document).trigger('organizations-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

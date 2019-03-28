@@ -1,0 +1,129 @@
+﻿@model IEnumerable<TransactionViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Transactions/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Transactions/List/Bundle")
+
+<div id="transactionsListPartialContent">
+    @if (Model.Any())
+    {
+        var total = Model.Sum(t => t.Amount);
+
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().Label)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Amount)</th>
+                        <th class="hidden-xs">@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                @foreach (var transactionsByType in Model.GroupBy(m => m.Organization).GroupBy(m => (m.Key != null) ? m.Key.Category : null).GroupBy(m => (m.Key != null) ? m.Key.Type : TransactionTypeViewModel.Expenditure).OrderBy(m => m.Key))
+                {
+                    var type = transactionsByType.Key;
+                    var typeTotal = transactionsByType.Sum(t => t.Sum(m => m.Sum(o => o.Amount)));
+
+                    <tbody>
+                        @foreach (var transactionsByCategory in transactionsByType.OrderBy(m => m.Key == null).ThenBy(m => (m.Key != null) ? m.Key.Label : String.Empty))
+                        {
+                            var category = transactionsByCategory.Key;
+                            var categorySelector = String.Format("category-{0}", (category != null) ? category.Id : 0);
+                            var categoryTarget = "#transactionsListPartialContent [data-parent=\"" + categorySelector + "\"]";
+                            var categoryLabel = (category != null) ? category.Label : Resource.Labels_Other;
+                            var categoryTotal = transactionsByCategory.Sum(m => m.Sum(x => x.Amount));
+
+                            <tr data-selector="@categorySelector" data-target="@categoryTarget" data-toggle="collapse">
+                                <td><span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span></td>
+                                <td>
+                                    @if (category != null)
+                                    {
+                                        switch (category.Type)
+                                        {
+                                            case TransactionTypeViewModel.Income:
+                                                <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                                break;
+                                            case TransactionTypeViewModel.Expenditure:
+                                                <span class="glyphicon glyphicon-arrow-down text-danger"></span>
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    @String.Format("{0} ({1})", categoryLabel, transactionsByCategory.Sum(m => m.Count()))
+                                </td>
+                                <td class="text-right">@Html.DisplayFor(m => categoryTotal, "Currency")</td>
+                                <td class="hidden-xs"></td>
+                            </tr>
+
+                            foreach (var transactionsByOrganization in transactionsByCategory.OrderBy(m => m.Key == null).ThenBy(m => (m.Key != null) ? m.Key.Label : String.Empty))
+                            {
+                                var organization = transactionsByOrganization.Key;
+                                var organizationSelector = String.Format("organization-{0}", (organization != null) ? organization.Id : 0);
+                                var organizationTarget = "#transactionsListPartialContent [data-parent=\"" + organizationSelector + "\"]";
+                                var organizationLabel = (organization != null) ? organization.Label : Resource.Labels_Other;
+                                var organizationTotal = transactionsByOrganization.Sum(m => m.Amount);
+
+                                <tr class="collapse" data-selector="@organizationSelector" data-parent="@categorySelector" data-target="@organizationTarget" data-toggle="collapse">
+                                    <td class="collapser"><span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span></td>
+                                    <td>@String.Format("{0} ({1})", organizationLabel, transactionsByOrganization.Count())</td>
+                                    <td class="text-right">@Html.DisplayFor(m => organizationTotal, "Currency")</td>
+                                    <td class="hidden-xs"></td>
+                                </tr>
+
+                                foreach (var transaction in transactionsByOrganization.OrderBy(m => m.Date).ThenBy(m => m.Label))
+                                {
+                                    <tr class="collapse" data-parent="@organizationSelector">
+                                        <td class="collapser-2"></td>
+                                        <td style="padding-left: 46px;">@String.Format("[{0}] {1}", transaction.Date.ToString("d"), transaction.Label)</td>
+                                        <td class="text-right">@Html.DisplayFor(m => transaction.Amount, "Currency")</td>
+                                        <td class="hidden-xs">
+                                            <a href="#" class="invisible" data-action="edit" data-transaction-id="@transaction.Id"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                            @if (organization != null)
+                                            {
+                                                <a href="#" class="invisible" data-action="schedule" data-transaction-id="@transaction.Id"><span class="glyphicon glyphicon-calendar"></span>Planifier</a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+
+                        <tr class="table-total">
+                            <td></td>
+                            <td class="text-right">@type.DisplayName()</td>
+                            <td class="text-right">@Html.DisplayFor(m => typeTotal, "Currency")</td>
+                            <td class="hidden-xs"></td>
+                        </tr>
+                    </tbody>
+                }
+
+                <tfoot>
+                    <tr class="table-total">
+                        <td></td>
+                        <td class="text-right"><strong>@Resource.Labels_Total</strong></td>
+                        <td class="text-right">@Html.DisplayFor(m => total, "Currency")</td>
+                        <td class="hidden-xs"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="editTransactionDialog" title="@Resource.Titles_TransactionEdition"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Consultation.Transactions.List.init({
+                container: '#editTransactionDialog',
+                editUrl: '@Url.Action("Edit", "Transactions")'
+            });
+
+            handleTransactionsListEvents();
+        });
+    </script>
+</div>

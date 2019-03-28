@@ -1,0 +1,52 @@
+﻿@model TransactionViewModel
+
+@Html.HiddenFor(m => m.AccountId)
+@Html.HiddenFor(m => m.Number)
+@Html.HiddenFor(m => m.Date, new { id = "dateIso" })
+@Html.HiddenFor(m => m.Label)
+@Html.HiddenFor(m => m.Amount)
+
+<div class="form-group">
+    @Html.LabelFor(m => m.OrganizationId, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.DropDownListFor(m => m.OrganizationId, new SelectList(Model.Organizations.OrderBy(m => m.Category.Label).ThenBy(m => m.Label), "Id", "Label", "Category.Label", 0), String.Empty, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Number, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        <div class="form-control-static">
+            @Model.Number
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Label, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        <div class="form-control-static">
+            @Model.Label
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Amount, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        <div class="form-control-static">
+            @Html.DisplayFor(m => m.Amount, "Currency")
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Date, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        <div class="form-control-static">
+            @Model.Date.ToString("d")
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Description, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+</div>

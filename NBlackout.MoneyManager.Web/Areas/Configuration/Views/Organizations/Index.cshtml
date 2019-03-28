@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Organizations/Bundle")
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Organizations/Index/Bundle")
+
+<div id="organizationsListContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.Organizations.Index.List.init({
+            container: '#organizationsListContainer',
+            url: '@Url.Action("List")'
+        });
+
+        handleOrganizationsIndexEvents();
+    });
+</script>

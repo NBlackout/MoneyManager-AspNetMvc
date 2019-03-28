@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SuggestionResultViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/Classification/SuggestionsPartial/Bundle")
+
+<div id="classificationSuggestionsPartialContent">
+    <small><a href="#" data-action="update-all" class="@(!Model.Any() ? "invisible" : "")"><span class="glyphicon glyphicon-ok"></span>@Resource.Actions_ValidateAll</a></small>
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().OrganizationLabel)</th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionLabel)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionAmount)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+                @foreach (var suggestionByType in Model.GroupBy(m => m.Category).OrderBy(t => t.Key.DisplayName()))
+                {
+                    <tbody>
+                        @foreach (var suggestion in suggestionByType.OrderBy(m => m.CustomerFullName).ThenBy(m => m.AccountTitle).ThenBy(m => m.OrganizationLabel).ThenBy(m => m.TransactionDate).ThenBy(m => m.TransactionLabel))
+                        {
+                            <tr>
+                                <td>
+                                    @switch (suggestion.Category)
+                                    {
+                                        case TransactionTypeViewModel.Income:
+                                            <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                            break;
+                                        case TransactionTypeViewModel.Expenditure:
+                                            <span class="glyphicon glyphicon-arrow-down text-danger"></span>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    @suggestion.OrganizationLabel
+                                </td>
+                                <td>@String.Format("{0} / {1}", suggestion.CustomerFullName, suggestion.AccountTitle)</td>
+                                <td>@String.Format("[{0}] {1}", suggestion.TransactionDate.ToString("d"), suggestion.TransactionLabel)</td>
+                                <td class="text-right">@Html.DisplayFor(m => suggestion.TransactionAmount, "Currency")</td>
+                                <td>
+                                    <a href="#" class="invisible" data-action="update" data-transaction-id="@suggestion.TransactionId" data-organization-id="@suggestion.OrganizationId"><span class="glyphicon glyphicon-ok"></span>@Resource.Actions_Validate</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Administration.Classification.SuggestionsPartial.Crud.init({
+                updateOrganizationUrl: '@Url.Action("UpdateOrganization", "Transactions", new { area = "Consultation" })',
+                updateOrganizationsUrl: '@Url.Action("UpdateOrganizations", "Transactions", new { area = "Consultation" })'
+            });
+
+            handleClassificationSuggestionsPartialEvents();
+        });
+    </script>
+</div>

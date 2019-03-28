@@ -1,0 +1,78 @@
+﻿@model AccountViewModel
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Accounts/ActivityPartial/Bundle")
+
+<div id="accountsActivityPartialContent">
+    @{
+        var dates = new List<DateTime>();
+
+        var now = DateTime.Now;
+        for (var date = new DateTime(now.Year - 1, 1, 1); date < now.AddMonths(1); date = date.AddMonths(1))
+        {
+            dates.Add(date);
+        }
+    }
+
+    <div class="account-header clearfix">
+        <div class="pull-left">
+            <h2>@Model.Title <small class="hidden-xs">@Model.Number</small></h2>
+            <a href="#" class="hidden-xs" data-action="details" data-id="@Model.Id"><span class="glyphicon glyphicon-list-alt"></span>@Resource.Labels_Details</a>
+        </div>
+        <div class="pull-right text-right text-success">
+            <h1><strong>@Html.DisplayFor(m => m.Balance, "Currency")</strong></h1>
+            <span>≈ @Html.DisplayFor(m => m.EstimatedBalanceByEndOfMonth, "Currency")</span>
+            <span title="@Html.DisplayNameFor(m => m.EstimatedBalanceByEndOfMonth)" class="glyphicon glyphicon-question-sign"></span>
+        </div>
+    </div>
+    <hr>
+    <div class="form-inline text-center">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" data-action="date" data-target="fast-backward" @((dates.Count() == 1) ? "disabled=disabled" : "")><span class="glyphicon glyphicon-fast-backward"></span></button>
+                    <button class="btn btn-default" data-action="date" data-target="step-backward" @((dates.Count() == 1) ? "disabled=disabled" : "")><span class="glyphicon glyphicon-step-backward"></span></button>
+                </div>
+                <select id="dates" class="form-control" data-id="@Model.Id">
+                    @foreach (var date in dates)
+                    {
+                        <option data-year="@date.Year" data-month="@date.Month" @((date.Year == now.Year && date.Month == now.Month) ? "selected=selected" : "")>@date.ToString("MMMM yyyy")</option>
+                    }
+                </select>
+                <div class="input-group-btn">
+                    <button class="btn btn-default" data-action="date" data-target="step-forward"><span class="glyphicon glyphicon-step-forward"></span></button>
+                    <button class="btn btn-default" data-action="date" data-target="fast-forward"><span class="glyphicon glyphicon-fast-forward"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3>@Resource.Labels_TransactionForecasts <small><a href="#" data-action="show-all">@Resource.Actions_ShowAll</a></small></h3>
+    <div id="accountsTransactionForecastHitsOfMonthPartialContainer"></div>
+    <h3>@Resource.Labels_Transactions</h3>
+    <div id="accountsTransactionsOfMonthPartialContainer"></div>
+    <div id="accountDetailsDialog" title="@Resource.Labels_AccountDetails"></div>
+    <div id="allTransactionForecastHitsOfMonthDialog" title="@Resource.Labels_TransactionForecasts"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Consultation.Accounts.ActivityPartial.Details.init({
+                container: '#accountDetailsDialog',
+                url: '@Url.Action("Details")'
+            });
+
+            NBlackout.MoneyManager.Consultation.Accounts.ActivityPartial.TransactionForecastHitsOfMonth.init({
+                container: '#accountsTransactionForecastHitsOfMonthPartialContainer',
+                url: '@Url.Action("TransactionForecastHitsOfMonthPartial", new { doneFilter = false })'
+            });
+
+            NBlackout.MoneyManager.Consultation.Accounts.ActivityPartial.AllTransactionForecastHitsOfMonth.init({
+                container: '#allTransactionForecastHitsOfMonthDialog',
+                url: '@Url.Action("TransactionForecastHitsOfMonthPartial")'
+            });
+
+            NBlackout.MoneyManager.Consultation.Accounts.ActivityPartial.TransactionsOfMonth.init({
+                container: '#accountsTransactionsOfMonthPartialContainer',
+                url: '@Url.Action("TransactionsOfMonthPartial", "Transactions")'
+            });
+
+            handleAccountsActivityPartialEvents();
+        });
+    </script>
+</div>

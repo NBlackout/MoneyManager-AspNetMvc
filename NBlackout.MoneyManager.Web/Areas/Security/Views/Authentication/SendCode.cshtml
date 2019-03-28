@@ -1,0 +1,21 @@
+﻿@model SendCodeViewModel
+@{
+    Layout = "~/Areas/Security/Views/Shared/_Layout.cshtml";
+}
+<div id="authenticationContent">
+    <h3 id="authenticationTitle">@Resource.Labels_Code <small><a href="@Url.Action("SendCode", new { tokenProvider = Model.TokenProvider, returnUrl = Model.ReturnUrl})">@Resource.Actions_ReSend</a></small></h3>
+    @using (Html.BeginForm("VerifyCode", "Authentication", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.TokenProvider)
+        @Html.HiddenFor(m => m.ReturnUrl)
+
+        <div class="form-group @((!ViewData.ModelState.IsValidField("Code")) ? "has-error" : "")">
+            @Html.LabelFor(m => m.Code, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Code, null, new { @class = "help-block" })
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn btn-block btn-primary">@Resource.Actions_Validate</button>
+        </div>
+    }
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ReconciliationSuggestionResultViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Planning/SuggestionsPartial/Bundle")
+
+<div id="planningSuggestionsPartialContent">
+    <small><a href="#" data-action="update-all" class="@(!Model.Any() ? "invisible" : "")"><span class="glyphicon glyphicon-ok"></span>@Resource.Actions_ValidateAll</a></small>
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionForecastAccountTitle)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionForecastOrganizationLabel)</th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionLabel)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionForecastOrganizationAmount)</th>
+                        <th>@Html.DisplayNameFor(m => m.FirstOrDefault().TransactionAmount)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var suggestion in Model)
+                    {
+                        <tr>
+                            <td>@suggestion.TransactionForecastAccountTitle</td>
+                            <td>@suggestion.TransactionForecastOrganizationLabel</td>
+                            <td>@String.Format("[{0}] {1}", suggestion.TransactionForecastHitDate.ToString("d"), suggestion.TransactionLabel)</td>
+                            <td class="text-right">@Html.DisplayFor(m => suggestion.TransactionForecastOrganizationAmount, "NullableCurrency")</td>
+                            <td class="text-right">@Html.DisplayFor(m => suggestion.TransactionAmount, "Currency")</td>
+                            <td>
+                                <a href="#" class="invisible" data-action="update" data-transaction-forecast-hit-id="@suggestion.TransactionForecastHitId" data-transaction-id="@suggestion.TransactionId"><span class="glyphicon glyphicon-ok"></span>@Resource.Actions_Validate</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Configuration.Planning.SuggestionsPartial.Crud.init({
+                updateTransactionForecastHitUrl: '@Url.Action("UpdateTransactionForecastHit")',
+                updateTransactionForecastHitsUrl: '@Url.Action("UpdateTransactionForecastHits")'
+            });
+
+            handlePlanningSuggestionsPartialEvents();
+        });
+    </script>
+</div>

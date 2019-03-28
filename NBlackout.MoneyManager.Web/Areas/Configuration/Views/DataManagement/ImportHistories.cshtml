@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/DataManagement/ImportHistories/Bundle")
+
+<h3>@Resource.Labels_ImportHistories</h3>
+<div id="dataManagementImportHistoriesPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Configuration.DataManagement.ImportHistories.DataGrid.init({
+            container: '#dataManagementImportHistoriesPartialContainer',
+            url: '@Url.Action("ImportHistoriesPartial")'
+        });
+
+        handleImportHistoriesEvents();
+    });
+</script>

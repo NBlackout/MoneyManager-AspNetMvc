@@ -1,0 +1,129 @@
+﻿@model IEnumerable<OrganizationCategoryViewModel>
+@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/OrganizationCategories/ListPartial/Bundle")
+
+<div id="organizationCategoriesListPartialContent">
+    <div class="actions">
+        <button class="btn btn-default" data-action="create" data-target="organization">@Resource.Labels_NewCategory</button>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-collapse table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="fill">@Html.DisplayNameFor(m => m.FirstOrDefault().Label)</th>
+                        <th>@Resource.Labels_Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var organizationCategory in Model.Where(t => !t.CategoryId.HasValue).OrderByDescending(m => m.Type).ThenByDescending(m => m.Recurrent).ThenBy(m => m.Label))
+                    {
+                        var id = organizationCategory.Id;
+                        var label = organizationCategory.Label;
+                        var selector = "category-" + id;
+                        var target = "#organizationCategoriesListPartialContent [data-parent=\"" + selector + "\"]";
+                        var childCategories = organizationCategory.Categories;
+
+                        <tr data-selector="@selector" data-target="@target" data-toggle="collapse">
+                            <td>
+                                @if (childCategories.Any())
+                                {
+                                    <span class="glyphicon glyphicon-chevron-right" data-icon="collapse"></span>
+                                }
+                            </td>
+                            <td>
+                                @if (organizationCategory.Type == TransactionTypeViewModel.Expenditure)
+                                {
+                                    <span class="glyphicon glyphicon-arrow-down text-danger"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                }
+                                
+                                @if (organizationCategory.Recurrent)
+                                {
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                }
+
+                                @String.Format((childCategories.Any() ? "{0} ({1})" : "{0}"), label, childCategories.Count())
+                            </td>
+                            <td>
+                                <a href="#" class="invisible" data-action="create" data-target="automation-element" data-category-id="@id"><span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="#" class="invisible" data-action="edit" data-target="organization" data-id="@id"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                <a href="#" class="invisible" data-action="delete" data-target="organization" data-id="@id"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                            </td>
+                        </tr>
+
+                        foreach (var childCategory in childCategories.OrderByDescending(m => m.Type).ThenByDescending(m => m.Recurrent).ThenBy(m => m.Label))
+                        {
+                            var childId = childCategory.Id;
+
+                            <tr class="collapse" data-parent="@selector" data-toggle="collapse">
+                                <td></td>
+                                <td>
+                                    @if (childCategory.Recurrent)
+                                    {
+                                        if (childCategory.Type == TransactionTypeViewModel.Expenditure)
+                                        {
+                                            <span class="glyphicon glyphicon-refresh text-danger"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="glyphicon glyphicon-refresh text-success"></span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (childCategory.Type == TransactionTypeViewModel.Expenditure)
+                                        {
+                                            <span class="glyphicon glyphicon-arrow-down text-danger"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="glyphicon glyphicon-arrow-up text-success"></span>
+                                        }
+                                    }
+
+                                    @childCategory.Label
+                                </td>
+                                <td>
+                                    <a href="#" class="invisible" data-action="edit" data-id="@childId"><span class="glyphicon glyphicon-edit"></span>@Resource.Actions_Edit</a>
+                                    <a href="#" class="invisible" data-action="delete" data-id="@childId"><span class="glyphicon glyphicon-trash"></span>@Resource.Actions_Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="actions">
+            <button class="btn btn-default" data-action="create">@Resource.Labels_NewCategory</button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <span>@Resource.Messages_NoDataFound</span>
+        </div>
+    }
+
+    <div id="organizationCategoryDialog" title="@Resource.Titles_OrganizationCategoryEdition"></div>
+    <div id="deleteOrganizationCategoryDialog" title="@Resource.Titles_OrganizationCategoryDeletion"></div>
+    <script type="text/javascript">
+        $(function() {
+            NBlackout.MoneyManager.Administration.OrganizationCategories.ListPartial.Crud.init({
+                container: '#organizationCategoryDialog',
+                createUrl: '@Url.Action("Create")',
+                editUrl: '@Url.Action("Edit")',
+                deleteContainer: '#deleteOrganizationCategoryDialog',
+                deleteUrl: '@Url.Action("Delete")'
+            });
+
+            handleOrganizationCategoriesListPartialEvents();
+        });
+    </script>
+</div>

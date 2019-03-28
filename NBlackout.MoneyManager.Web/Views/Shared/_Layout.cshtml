@@ -1,0 +1,120 @@
+﻿@using System.Globalization;
+@{
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+<!DOCTYPE html>
+<html lang="@lang">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="~/Content/Styles/nblackout/money-manager/images/icon.png">
+    <title>@Resource.Titles_MoneyManager</title>
+    @Styles.Render("~/Content/Styles/Bootstrap/Bundle")
+    @Styles.Render("~/Content/Styles/jQuery-UI/Bundle")
+    @Styles.Render("~/Content/Styles/Tagify/Bundle")
+    @Styles.Render("~/Content/Styles/NBlackout/Bundle")
+    @Styles.Render("~/Content/Styles/NBlackout/MoneyManager/Bundle")
+    @Scripts.Render("~/Scripts/jQuery/Bundle")
+    @Scripts.Render("~/Scripts/Bootstrap/Bundle")
+    @Scripts.Render("~/Scripts/jQuery-UI/Bundle")
+    @Scripts.Render("~/Scripts/jQuery-Noty/Bundle")
+    @Scripts.Render("~/Scripts/Highcharts/Bundle")
+    @Scripts.Render("~/Scripts/Tagify/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/MoneyManager/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/MoneyManager/Configuration/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/MoneyManager/Consultation/Bundle")
+    @Scripts.Render("~/Scripts/NBlackout/MoneyManager/Security/Bundle")
+    <script type="text/javascript">
+        NBlackout.MoneyManager.currentArea = '@ViewContext.RouteData.DataTokens["area"]';
+        NBlackout.MoneyManager.currentController = '@ViewContext.RouteData.Values["controller"]';
+        NBlackout.MoneyManager.userInfoUrl = '@Url.Action("UserInfo", "User", new { area = "Security" })';
+
+        $(function() {
+            initializeComponents();
+            handleMoneyManagerEvents();
+        });
+    </script>
+</head>
+<body>
+    <div id="pageContainer">
+        <!-- Header -->
+        <div id="headerContainer" class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div id="loader" class="hidden"><img src="~/Content/Styles/nblackout/images/loader.gif" /></div>
+
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target="#navbarContainer" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand text-right">
+                        <img src="~/Content/Styles/nblackout/money-manager/images/icon.png">
+                        @Resource.Titles_MoneyManager
+                    </a>
+                </div>
+                @if (User != null && User.Identity.IsAuthenticated)
+                {
+                    <ul id="userMenu" class="nav navbar-nav navbar-right" style="display: none;">
+                        <li class="dropdown">
+                            <a id="userInfo" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img id="gravatar">@(User.Identity.Name) <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="manageAccount" href="@Url.Action("ManageAccount", "User", new { area = "Security" })">@Resource.Labels_Account</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("SignOut", "Authentication", new { area = "Security" })"><span class="glyphicon glyphicon-off"></span>@Resource.Actions_SignOut</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <!-- Menu -->
+        <ul id="navbarContainer" class="collapse navbar-collapse text-uppercase">
+            <li class="menu-item" data-area="Consultation">
+                <a href="#"><span class="glyphicon glyphicon-home"></span>@Resource.Labels_Consultation</a>
+                <ul class="submenu">
+                    <li class="menu-item" data-controller="Dashboard"><a href="@Url.Action("Index", "Dashboard", new { area = "Consultation" })">@Resource.Labels_Dashboard</a></li>
+                    <li class="menu-item" data-controller="Accounts"><a href="@Url.Action("Index", "Accounts", new { area = "Consultation" })">@Resource.Labels_Accounts</a></li>
+                    <li class="menu-item" data-controller="Transactions"><a href="@Url.Action("Index", "Transactions" , new { area = "Consultation" })">@Resource.Labels_Search</a></li>
+                </ul>
+            </li>
+            <li class="menu-item" data-area="Configuration">
+                <a href="#"><span class="glyphicon glyphicon-wrench"></span>@Resource.Labels_Configuration</a>
+                <ul class="submenu">
+                    <li class="menu-item" data-controller="DataManagement"><a href="@Url.Action("Index", "DataManagement", new { area = "Configuration" })">@Resource.Labels_DataManagement</a></li>
+                    <li class="menu-item" data-controller="Organizations"><a href="@Url.Action("Index", "Organizations", new { area = "Configuration" })">@Resource.Labels_Organizations</a></li>
+                    <li class="menu-item" data-controller="Planning"><a href="@Url.Action("Index", "Planning", new { area = "Configuration" })">@Resource.Labels_Planning</a></li>
+                    <li class="menu-item" data-controller="Accounts"><a href="@Url.Action("Index", "Accounts", new { area = "Configuration" })">@Resource.Labels_Accounts</a></li>
+                </ul>
+            </li>
+            <li class="menu-item" data-area="Administration">
+                <a href="#"><span class="glyphicon glyphicon-cog"></span>@Resource.Labels_Administration</a>
+                <ul class="submenu">
+                    <li class="menu-item" data-controller="OrganizationCategories"><a href="@Url.Action("Index", "OrganizationCategories", new { area = "Administration" })">@Resource.Labels_Classification</a></li>
+                    <li class="menu-item" data-controller="AccountCategories"><a href="@Url.Action("Index", "AccountCategories", new { area = "Administration" })">@Resource.Labels_AccountCategories</a></li>
+                    <li class="menu-item" data-controller="Customers"><a href="@Url.Action("Index", "Customers", new { area = "Administration" })">@Resource.Labels_Customers</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- View -->
+        <div id="viewContainer" class="container-fluid">
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <div id="footerContainer" class="clearfix container-fluid">
+            <div class="text-center version">
+                @ViewBag.Version
+            </div>
+        </div>
+    </div>
+</body>
+</html>

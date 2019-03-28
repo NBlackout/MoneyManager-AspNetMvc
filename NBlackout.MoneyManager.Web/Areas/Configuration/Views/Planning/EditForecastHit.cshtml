@@ -1,0 +1,32 @@
+﻿@model TransactionForecastHitViewModel
+
+@using (Html.BeginForm("SaveForecastHit", "Planning", FormMethod.Post, new { id = "editTransactionForecastHitForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-default">@Resource.Actions_Save</button>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function() {
+        $('#editTransactionForecastHitForm').submit(function() {
+            NBlackout.MoneyManager.Configuration.Planning.ForecastHitsPartial.ForecastHits.save({
+                form: $(this),
+                success: function() {
+                    noty({
+                        text: '@Resource.Messages_ModificationDone'
+                    });
+
+                    $(document).trigger('forecast-hits-updated');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/NBlackout/MoneyManager/Administration/Customers/List/Bundle")
+
+<h3>@Resource.Labels_Customers</h3>
+<div id="customersListPartialContainer"></div>
+<script type="text/javascript">
+    $(function() {
+        NBlackout.MoneyManager.Administration.Customers.List.DataGrid.init({
+            container: '#customersListPartialContainer',
+            url: '@Url.Action("ListPartial")'
+        });
+
+        handleCustomersListEvents();
+    });
+</script>
